@@ -10,4 +10,10 @@
     <string name="name">Name</string>
     <string name="create_account">Create Account</string>
     <string name="already_have_account">Already have account?</string>
+    <string name="welcome_to_tamang">Welcome To Tamang Food Services</string>
+    <string name="enter_info_login">Enter your Phone number or Email address for sign in. Enjoy your food :)</string>
+    <string name="forget_password">Forget Password ?</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="create_new_acc">Create new account</string>
+    <string name="dont_have">Do not have account?</string>
 </resources>
