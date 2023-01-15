@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.foodplanner.view.activities.AuthActivity;
 import com.example.foodplanner.view.activities.MainActivity;
 
 public class DeciderActivity extends AppCompatActivity {
