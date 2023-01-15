@@ -7,5 +7,139 @@
     android:orientation="vertical"
     android:background="@color/white"
     tools:context=".view.fragments.SignUpFragment">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="40dp">
+    <TextView
+        android:id="@+id/create_acco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginTop="30dp"
+        android:letterSpacing="0.01"
+        android:text="@string/create_account"
+        android:textColor="#010F07"
+        android:textSize="34sp" />
 
+    <TextView
+        android:id="@+id/enter_your"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="3sp"
+        android:text="Enter your Name, Email and Password for sign up."
+        android:textColor="#868686"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/already_have_account"
+        android:textColor="#EEA734"
+        android:textSize="16sp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/edt_name"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:paddingStart="5dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/white"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="5dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="92dp"
+        tools:layout_editor_absoluteY="248dp">
+
+        <EditText
+            android:id="@+id/ET_Password"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/white"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingStart="5dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/Get_Started"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/button_background"
+        android:text="@string/sign_up"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="3sp"
+        android:text="By Signing up you agree to our Terms Conditions and Privacy Policy."
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="30dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/or"
+        android:textSize="16sp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="#4285F4"
+        android:drawableStart="@drawable/common_google_signin_btn_icon_dark_normal"
+        android:text="@string/connect_with_google"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</LinearLayout>
 </LinearLayout>
