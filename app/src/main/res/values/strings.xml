@@ -16,4 +16,7 @@
     <string name="sign_in">SIGN IN</string>
     <string name="create_new_acc">Create new account</string>
     <string name="dont_have">Do not have account?</string>
+    <string name="forget_password_check">Forget Password</string>
+    <string name="enter_info_forget">Enter your email address and we will send you a reset instructions.</string>
+    <string name="reset_pass_btn">RESET PASSWORD</string>
 </resources>
