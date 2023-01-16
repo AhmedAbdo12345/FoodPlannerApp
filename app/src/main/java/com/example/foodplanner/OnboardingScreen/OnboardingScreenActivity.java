@@ -60,7 +60,7 @@ public class OnboardingScreenActivity extends AppCompatActivity {
     }
 
     private void getStartedButton() {
-        GetStarted=findViewById(R.id.Get_Started);
+        GetStarted=findViewById(R.id.btn_signup);
         final Intent intent=new Intent(this, MainActivity.class);
         GetStarted.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,4 +1,6 @@
-package com.example.foodplanner.model;
+package com.example.foodplanner.model.ModelArrayList;
+
+import com.example.foodplanner.model.ModelClasses.MealsModel;
 
 import java.util.ArrayList;
 

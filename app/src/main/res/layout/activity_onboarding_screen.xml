@@ -8,7 +8,7 @@
     tools:context=".OnboardingScreen.OnboardingScreenActivity">
 
         <Button
-            android:id="@+id/Get_Started"
+            android:id="@+id/btn_signup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -39,7 +39,7 @@
         android:gravity="center"
         android:layoutDirection="ltr"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/Get_Started"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OnBoardingPageView" />
