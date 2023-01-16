@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeNav">
+    <fragment
+        android:id="@+id/homeNav"
+        android:name="com.example.foodplanner.view.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeNav_to_plansNav"
+            app:destination="@id/plansNav" />
+        <action
+            android:id="@+id/action_homeNav_to_favNav"
+            app:destination="@id/favNav" />
+        <action
+            android:id="@+id/action_homeNav_to_profileNav"
+            app:destination="@id/profileNav" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileNav"
+        android:name="com.example.foodplanner.view.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/favNav"
+        android:name="com.example.foodplanner.view.fragments.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" />
+    <fragment
+        android:id="@+id/plansNav"
+        android:name="com.example.foodplanner.view.fragments.PlanFragment"
+        android:label="fragment_plan"
+        tools:layout="@layout/fragment_plan" />
+</navigation>
