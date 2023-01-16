@@ -7,6 +7,9 @@
     android:orientation="vertical"
     android:background="@color/white"
     tools:context=".view.fragments.SignUpFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -89,7 +92,7 @@
         tools:layout_editor_absoluteY="248dp">
 
         <EditText
-            android:id="@+id/ET_Password"
+            android:id="@+id/edt_Password"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="18dp"
@@ -101,7 +104,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/Get_Started"
+        android:id="@+id/btn_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -135,15 +138,20 @@
         android:text="@string/or"
         android:textSize="16sp" />
 
-    <Button
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btn_googleAuth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:background="#4285F4"
         android:drawableStart="@drawable/common_google_signin_btn_icon_dark_normal"
         android:text="@string/connect_with_google"
         android:textColor="@color/white"
+
         android:textSize="16sp"
         tools:ignore="TextContrastCheck" />
+
 </LinearLayout>
+    </ScrollView>
 </LinearLayout>
