@@ -11,8 +11,8 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_nav_grav_main"
-            app:destination="@id/nav_grav_main" />
+            android:id="@+id/action_loginFragment_to_nav_graph"
+            app:destination="@id/nav_graph_home" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -23,5 +23,5 @@
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-    <include app:graph="@navigation/nav_grav_main" />
+    <include app:graph="@navigation/nav_graph_home" />
 </navigation>

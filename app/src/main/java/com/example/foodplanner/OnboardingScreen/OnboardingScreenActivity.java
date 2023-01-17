@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.view.activities.AuthActivity;
+import com.example.foodplanner.view.activities.HomeActivity;
 import com.example.foodplanner.view.activities.MainActivity;
 
 import java.util.List;
