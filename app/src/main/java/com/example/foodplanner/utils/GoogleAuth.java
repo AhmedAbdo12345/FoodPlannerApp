@@ -1,11 +1,21 @@
 package com.example.foodplanner.utils;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+
 import com.example.foodplanner.R;
+import com.example.foodplanner.model.ModelClasses.AuthModel;
+import com.example.foodplanner.presenter.interfaces.SignUpFragmentInterface;
 import com.example.foodplanner.view.activities.MainActivity;
+import com.example.foodplanner.view.fragments.LoginFragment;
+import com.example.foodplanner.view.fragments.SignUpFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -27,107 +37,52 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GoogleAuth {
-
-    private GoogleSignInClient mGoogleSignInClient;
-    private final static int RC_SIGN_IN = 123;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    GoogleSignInClient googleSignInClient;
 
 
-
-    public GoogleSignInClient createRequest(Activity activity) {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+    public GoogleSignInClient createObjFromGoogleSignInClient(Activity activity) {
+        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(activity.getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
+                .requestEmail().build();
+        googleSignInClient = GoogleSignIn.getClient(activity,options);
 
         /*----this line to ask me  to choice account before SignIn  -----------*/
         /*----Without this line if my device has one account , automaic Sign in By this account-----*/
-        mGoogleSignInClient.revokeAccess();
+        googleSignInClient.revokeAccess();
 
-        return mGoogleSignInClient;
+        return googleSignInClient;
+       //firebaseAuth = FirebaseAuth.getInstance();
     }
 
+    public void authWithGoogle(GoogleSignInAccount result, FirebaseAuth firebaseAuth,SignUpFragmentInterface signUpFragmentInterface,Context context) {
+        AuthCredential authCredential = GoogleAuthProvider.getCredential(result.getIdToken(), null);
+        try {
+            firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    // To dismiss the dialog
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null) {
+                            String email = user.getEmail().toString();
+                            String name = user.getDisplayName().toString();
+                            // SaveUserDataInFirestore(activity,user.getUid(),name,email);
+                            AuthModel authModel = new AuthModel(user.getUid(), name, email);
+                            SaveUserDataInFireStore.saveDataInFStore(authModel, signUpFragmentInterface);
+                            Toast.makeText(context, "Gooood T.", Toast.LENGTH_SHORT).show();
 
-    public void SignInGoogleAuth(GoogleSignInClient signInClient, Activity activity) {
-        Intent signInIntent = signInClient.getSignInIntent();
 
-        activity.startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
+                        }
 
-    public void onActivityResultMyCodeFunction(int requestCode, Intent data, Activity activity) {
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account, activity);
-                Toast.makeText(activity, "Successful", Toast.LENGTH_SHORT).show();
-
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                // ...
-                Toast.makeText(activity, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-            }
+                    } else {
+                        Toast.makeText(context, "Sorry auth failed.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } catch (Exception e) {
+            Log.i("auth", "authWithGoogle: " + e.getMessage());
         }
-    }
-
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct, Activity activity) {
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-
-        mAuth.signInWithCredential(credential).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                mAuth.signInWithCredential(credential)
-                        .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    if (user != null) {
-                                        String email = user.getEmail().toString();
-                                        String name = user.getDisplayName().toString();
-                                        SaveUserDataInFirestore(activity, user.getUid(), name, email);
-
-                                        Intent intent = new Intent(activity, MainActivity.class);
-                                        activity.startActivity(intent);
-                                    }
-
-
-                                } else {
-                                    Toast.makeText(activity, "Sorry auth failed.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-        });
-    }
-
-    public void SaveUserDataInFirestore(Activity activity, String idUser, String name, String email) {
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-
-        DocumentReference documentReference = firestore.collection("User").document(idUser);
-        Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("Name", name);
-        userInfo.put("Email", email);
-        documentReference.set(userInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(activity, "Saving User Info Succefully", Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(activity, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
     }
 }

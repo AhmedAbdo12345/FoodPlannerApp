@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_grav_auth"
-    app:startDestination="@id/signUpFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.foodplanner.view.fragments.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_nav_grav_main"
+            app:destination="@id/nav_grav_main" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.foodplanner.view.fragments.SignUpFragment"
@@ -19,4 +23,5 @@
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <include app:graph="@navigation/nav_grav_main" />
 </navigation>
