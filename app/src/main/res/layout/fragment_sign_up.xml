@@ -62,7 +62,8 @@
             android:background="@color/white"
             android:hint="@string/name"
             android:inputType="textPersonName"
-            android:paddingStart="5dp" />
+            android:paddingStart="5dp"
+            tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -78,7 +79,8 @@
             android:background="@color/white"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:paddingStart="5dp" />
+            android:paddingStart="5dp"
+            tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -97,7 +99,8 @@
             android:background="@color/white"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:paddingStart="5dp" />
+            android:paddingStart="5dp"
+            tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -145,7 +148,9 @@
         android:drawableStart="@drawable/common_google_signin_btn_icon_dark_normal"
         android:text="@string/connect_with_google"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+
+        android:textSize="16sp"
+        tools:ignore="TextContrastCheck" />
 
 </LinearLayout>
     </ScrollView>
