@@ -15,19 +15,27 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.foodplanner.R;
+import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
 import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
+import com.example.foodplanner.presenter.classes.CategoryPresenter;
 import com.example.foodplanner.presenter.classes.MealsPresenter;
+import com.example.foodplanner.presenter.interfaces.CategoryInterface;
 import com.example.foodplanner.presenter.interfaces.MealstInterface;
+import com.example.foodplanner.utils.ConstantsClass;
+import com.example.foodplanner.view.adapters.CategoryAdapter;
 import com.example.foodplanner.view.adapters.MealsAdapter;
 
 import java.util.List;
 
 
-public class HomeFragment extends Fragment implements MealstInterface , MealsAdapter.ListItemClickListener {
-    MealsPresenter homeFragmentPresenter;
+public class HomeFragment extends Fragment implements MealstInterface , CategoryInterface, MealsAdapter.ListItemClickListener
+,CategoryAdapter.ListItemClickListener{
+    MealsPresenter mealsPresenter;
+    CategoryPresenter categoryPresenter;
 
-    RecyclerView recyclerView_random;
+    RecyclerView recyclerView_random,recyclerView_category;
     MealsAdapter mealsAdapter;
+    CategoryAdapter categoryAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +53,13 @@ public class HomeFragment extends Fragment implements MealstInterface , MealsAda
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView_random = view.findViewById(R.id.rv_randomMeal);
+        recyclerView_category=view.findViewById(R.id.rv_categories);
 
-        homeFragmentPresenter=new MealsPresenter(this);
-        homeFragmentPresenter.getListOfRandomMeals();
+        mealsPresenter=new MealsPresenter(this);
+        mealsPresenter.getListOfRandomMeals();
+
+        categoryPresenter=new CategoryPresenter(this);
+        categoryPresenter.getCategories();
     }
 
 
@@ -69,7 +81,7 @@ public class HomeFragment extends Fragment implements MealstInterface , MealsAda
            // textView.setText(mealsModelRequestList.get(0).getMealsModelRequest().get(0).getStrCategory());
             recyclerView_random.setHasFixedSize(true);
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
-            gridLayoutManager.setOrientation(RecyclerView.VERTICAL);
+            gridLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
             recyclerView_random.setLayoutManager(gridLayoutManager);
 
             mealsAdapter = new MealsAdapter(mealsModelRequestList,getContext(),HomeFragment.this);
@@ -79,7 +91,28 @@ public class HomeFragment extends Fragment implements MealstInterface , MealsAda
 
 
     @Override
-    public void onClick(int position) {
+    public void getSuccessCategoriesFromApi(CategoryModelResponse categoryArrayListModels) {
+        recyclerView_category.setHasFixedSize(true);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        gridLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView_category.setLayoutManager(gridLayoutManager);
+
+        categoryAdapter = new CategoryAdapter(categoryArrayListModels,getContext(),HomeFragment.this);
+        recyclerView_category.setAdapter(categoryAdapter);
+    }
+
+    @Override
+    public void getFailureCategoriesFromApi(String message) {
+
+    }
+
+    @Override
+    public void onClickCategory(int position) {
+
+    }
+
+    @Override
+    public void onClickMeals(int position) {
 
     }
 }

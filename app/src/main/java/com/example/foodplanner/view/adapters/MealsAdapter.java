@@ -14,7 +14,6 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealsViewHolder> {
@@ -22,24 +21,25 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealsViewHol
     Context context;
     final private MealsAdapter.ListItemClickListener mOnClickListener;
 
-
-    public MealsAdapter(List<MealsModelResponse> mealsModelResponses, Context applicationContext, MealsAdapter.ListItemClickListener mOnClickListener) {
+    public MealsAdapter(List<MealsModelResponse> mealsModelResponses, Context applicationContext, MealsAdapter.ListItemClickListener mOnClickListener ) {
         this.modelArrayList = mealsModelResponses;
         this.context = applicationContext;
         this.mOnClickListener = mOnClickListener;
+
     }
 
 
-
     public interface ListItemClickListener {
-        void onClick(int position);
+
+        void onClickMeals(int position);
     }
 
     @NonNull
     @Override
     public MealsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MealsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_random_meal, parent, false));
-    }
+            return new MealsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_random_meals, parent, false));
+
+        }
 
     @Override
     public void onBindViewHolder(@NonNull MealsViewHolder holder, int position) {

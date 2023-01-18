@@ -1,13 +1,11 @@
 package com.example.foodplanner.presenter.interfaces;
 
-import com.example.foodplanner.model.ModelClasses.CategoryModel;
+import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
 
-import java.util.ArrayList;
+import io.reactivex.rxjava3.annotations.NonNull;
 
-public class CategoryInterface {
-    public void getSuccessCategoriesFromApi(ArrayList<CategoryModel> categoryArrayListModels) {
-    }
+public interface CategoryInterface {
+    public void getSuccessCategoriesFromApi(CategoryModelResponse categoryArrayListModels) ;
 
-    public void getFailureCategoriesFromApi(String message) {
-    }
+    public void getFailureCategoriesFromApi(String message);
 }
