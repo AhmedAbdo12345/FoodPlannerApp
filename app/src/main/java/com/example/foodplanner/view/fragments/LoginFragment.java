@@ -1,27 +1,23 @@
 package com.example.foodplanner.view.fragments;
 
-
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.foodplanner.R;
+
 
 import com.example.foodplanner.model.ModelClasses.AuthModel;
 import com.example.foodplanner.presenter.classes.SignUpFragmentPresenter;
@@ -36,18 +32,22 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.example.foodplanner.presenter.classes.LogInFragmentPresenter;
+import com.example.foodplanner.presenter.interfaces.LogInFragmentInterface;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 
-public class LoginFragment extends Fragment implements SignUpFragmentInterface {
+public class LoginFragment extends Fragment implements SignUpFragmentInterface, LogInFragmentInterface {
 
     Button googleBtn;
     FirebaseAuth firebaseAuth;
     GoogleSignInClient googleSignInClient;
     GoogleAuth googleAuth;
+
+    LogInFragmentPresenter logInFragmentPresenter;
+    EditText email, password;
+    Button login;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,8 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface {
         googleAuth = new GoogleAuth();
         googleSignInClient = googleAuth.createObjFromGoogleSignInClient(getActivity());
         firebaseAuth = FirebaseAuth.getInstance();
+
+        logInFragmentPresenter = new LogInFragmentPresenter(this);
 
     }
 
@@ -68,6 +70,18 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        email = view.findViewById(R.id.sign_email);
+        password = view.findViewById(R.id.sign_Password);
+        login = view.findViewById(R.id.signInBtn);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logInFragmentPresenter.logIn(email, password);
+            }
+        });
 
         googleBtn = view.findViewById(R.id.btn_Login_googleAuth);
 
@@ -87,21 +101,20 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface {
         GoogleSignInAccount result = null;
         if (requestCode == 100) {
             try {
-                 result = GoogleSignIn.getSignedInAccountFromIntent(data).getResult();
-            }catch (Exception e){
-                Log.i("zxc", "onActivityResult: Error  "+e.toString());
+                result = GoogleSignIn.getSignedInAccountFromIntent(data).getResult();
+            } catch (Exception e) {
+                Log.i("zxc", "onActivityResult: Error  " + e.toString());
             }
             if (result != null) {
-                googleAuth.authWithGoogle(result,firebaseAuth,LoginFragment.this,getContext());
+                googleAuth.authWithGoogle(result, firebaseAuth, LoginFragment.this, getContext());
             }
         }
     }
 
 
-
     @Override
     public void onSuccessResult() {
-       // NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_nav_grav_main);
+        // NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_nav_grav_main);
         Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
 
     }
@@ -110,8 +123,19 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface {
     public void onFailureResult(String message) {
 
     }
+
+
+    @Override
+    public void loginSucess(AuthResult authResult) {
+        //navigate
+        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loginFaliure(@NonNull Exception e) {
+        //navigate forget password
+        Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+    }
 }
-
-
 
 

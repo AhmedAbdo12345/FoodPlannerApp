@@ -40,7 +40,6 @@ public class HomeFragment extends Fragment implements MealstInterface {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-textView=view.findViewById(R.id.tv_home);
         homeFragmentPresenter=new MealsPresenter(this);
         homeFragmentPresenter.getListOfRandomMeals();
     }
