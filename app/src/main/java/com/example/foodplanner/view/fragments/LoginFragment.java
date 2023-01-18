@@ -1,12 +1,16 @@
 package com.example.foodplanner.view.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavHostController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodplanner.R;
@@ -48,6 +53,7 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
     LogInFragmentPresenter logInFragmentPresenter;
     EditText email, password;
     Button login;
+    TextView forgetTV;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,6 +98,14 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
                 startActivityForResult(intent, 100);
             }
         });
+        forgetTV=view.findViewById(R.id.forgetTextView);
+        forgetTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_forgotPasswordFragment);
+
+            }
+        });
     }
 
 
@@ -129,6 +143,7 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
     public void loginSucess(AuthResult authResult) {
         //navigate
         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
 
     }
 
