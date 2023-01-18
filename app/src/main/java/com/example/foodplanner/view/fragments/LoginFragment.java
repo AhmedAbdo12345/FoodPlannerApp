@@ -143,6 +143,8 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
     public void loginSucess(AuthResult authResult) {
         //navigate
         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
+
     }
 
     @Override
