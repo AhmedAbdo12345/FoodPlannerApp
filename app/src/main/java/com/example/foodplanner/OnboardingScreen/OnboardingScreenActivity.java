@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.foodplanner.R;
+import com.example.foodplanner.view.activities.AuthActivity;
 import com.example.foodplanner.view.activities.HomeActivity;
 
 import java.util.List;
@@ -61,7 +62,7 @@ public class OnboardingScreenActivity extends AppCompatActivity {
 
     private void getStartedButton() {
         GetStarted=findViewById(R.id.btn_signup);
-        final Intent intent=new Intent(this, HomeActivity.class);
+        final Intent intent=new Intent(this, AuthActivity.class);
         GetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
