@@ -32,6 +32,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -83,12 +84,15 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        GoogleSignInAccount result = null;
         if (requestCode == 100) {
-            GoogleSignInAccount result = GoogleSignIn.getSignedInAccountFromIntent(data).getResult();
+            try {
+                 result = GoogleSignIn.getSignedInAccountFromIntent(data).getResult();
+            }catch (Exception e){
+                Log.i("zxc", "onActivityResult: Error  "+e.toString());
+            }
             if (result != null) {
                 googleAuth.authWithGoogle(result,firebaseAuth,LoginFragment.this,getContext());
-
-
             }
         }
     }
@@ -98,7 +102,7 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface {
     @Override
     public void onSuccessResult() {
        // NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_nav_grav_main);
-        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_nav_graph);
+        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
 
     }
 

@@ -1,8 +1,6 @@
 package com.example.foodplanner.presenter.interfaces;
 
-import com.example.foodplanner.model.ModelArrayList.CategoryArrayListModel;
 import com.example.foodplanner.model.ModelClasses.CategoryModel;
-import com.example.foodplanner.model.ModelClasses.MealsModel;
 
 import java.util.ArrayList;
 

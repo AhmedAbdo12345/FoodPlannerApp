@@ -1,14 +1,6 @@
 package com.example.foodplanner.presenter.classes;
 
-import com.example.foodplanner.model.ModelArrayList.CategoryArrayListModel;
-import com.example.foodplanner.model.ModelArrayList.MealsArrayListModel;
-import com.example.foodplanner.model.api.MealsApiClient;
 import com.example.foodplanner.presenter.interfaces.CategoryInterface;
-import com.example.foodplanner.presenter.interfaces.MealstInterface;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CategoryPresenter {
 
@@ -18,16 +10,16 @@ public class CategoryPresenter {
         this.categoryInterface=categoryInterface;
     }
 
-    public void getCategories(){
-        MealsApiClient.getINSTANE().getCategories().enqueue(new Callback<CategoryArrayListModel>() {
+   /* public void getCategories(){
+        MealsApiClient.getINSTANE().getCategories().enqueue(new Callback<CategoryModelResponse>() {
             @Override
-            public void onResponse(Call<CategoryArrayListModel> call, Response<CategoryArrayListModel> response) {
-                categoryInterface.getSuccessCategoriesFromApi(response.body().getCategoryModelArrayList());
+            public void onResponse(Call<CategoryModelResponse> call, Response<CategoryModelResponse> response) {
+                categoryInterface.getSuccessCategoriesFromApi(response.body().getCategoryModelRequest());
 
             }
 
             @Override
-            public void onFailure(Call<CategoryArrayListModel> call, Throwable t) {
+            public void onFailure(Call<CategoryModelResponse> call, Throwable t) {
                 categoryInterface.getFailureCategoriesFromApi(t.getMessage());
 
             }
@@ -35,6 +27,6 @@ public class CategoryPresenter {
 
 
 
-    }
+    }*/
 
 }

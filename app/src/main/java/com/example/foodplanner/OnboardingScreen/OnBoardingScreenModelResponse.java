@@ -4,7 +4,7 @@ import com.example.foodplanner.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnBoardingScreenArrayListModel {
+public class OnBoardingScreenModelResponse {
 
    public static List<OnBoardingScreenModel> getOnBoardingObjects() {
         ArrayList<OnBoardingScreenModel> object = new ArrayList<OnBoardingScreenModel>();

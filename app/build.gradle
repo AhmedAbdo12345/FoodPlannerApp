@@ -74,9 +74,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-firestore:24.4.1'
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
-
-
-
     //---------------------------------------------------
+    //------------------to Using RX Adapter to using it in retrofit------------------------
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+    //---------------------------------------------------
+    //------------------to Using Logging interCepter to See retrofit response in Log ------------------------
+    implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
+    //---------------------------------------------------
+
 
 }

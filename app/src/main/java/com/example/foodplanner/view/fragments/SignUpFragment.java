@@ -103,7 +103,7 @@ public class SignUpFragment extends Fragment implements SignUpFragmentInterface 
     @Override
     public void onSuccessResult() {
         // NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_nav_grav_main);
-        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_nav_graph);
+        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
 
     }
 

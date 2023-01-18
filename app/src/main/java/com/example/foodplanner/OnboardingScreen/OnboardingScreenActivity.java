@@ -15,9 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.foodplanner.R;
-import com.example.foodplanner.view.activities.AuthActivity;
 import com.example.foodplanner.view.activities.HomeActivity;
-import com.example.foodplanner.view.activities.MainActivity;
 
 import java.util.List;
 
@@ -35,7 +33,7 @@ public class OnboardingScreenActivity extends AppCompatActivity {
 
 
         viewPager =findViewById(R.id.OnBoardingPageView);
-        onBoardingModels = OnBoardingScreenArrayListModel.getOnBoardingObjects();
+        onBoardingModels = OnBoardingScreenModelResponse.getOnBoardingObjects();
         pagerAdapter =new OnBoardingScreenAdapter(onBoardingModels,this);
         viewPager.setAdapter(pagerAdapter);
 
@@ -63,7 +61,7 @@ public class OnboardingScreenActivity extends AppCompatActivity {
 
     private void getStartedButton() {
         GetStarted=findViewById(R.id.btn_signup);
-        final Intent intent=new Intent(this, AuthActivity.class);
+        final Intent intent=new Intent(this, HomeActivity.class);
         GetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

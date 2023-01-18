@@ -1,12 +1,12 @@
 package com.example.foodplanner.model.api;
 
-import com.example.foodplanner.model.ModelArrayList.CategoryArrayListModel;
-import com.example.foodplanner.model.ModelArrayList.MealsArrayListModel;
-import com.example.foodplanner.model.ModelClasses.MealsModel;
+import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
+import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
 
-import java.util.ArrayList;
-
-import retrofit2.Call;
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
+import io.reactivex.rxjava3.core.Single;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -16,9 +16,15 @@ public class MealsApiClient {
     private static MealsApiClient INSTANE;
 
     public MealsApiClient() {
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .client(client)
                 .build();
 
 
@@ -33,16 +39,34 @@ public class MealsApiClient {
         return INSTANE;
     }
 
-    public Call<MealsArrayListModel> getMeals(){
-        return mealsApiInterface.getMeals();
+    public Single<MealsModelResponse> getSingleRandomMeal(){
+        return mealsApiInterface.getSingleRandomMeal();
     }
-    public Call<CategoryArrayListModel> getCategories(){
+    public Single<CategoryModelResponse> getCategories(){
         return mealsApiInterface.getCategories();
     }
-    public Call<MealsArrayListModel> getFilterByCategory(String category){
+
+    public Single<MealsModelResponse> getFilterByArea(String area){
+        return mealsApiInterface.getFilterByArea(area);
+    }
+
+    public Single<MealsModelResponse> getFilterByCategory(String category){
         return mealsApiInterface.getFilterByCategory(category);
     }
-    public Call<MealsArrayListModel> getFilterByName(String name){
-        return mealsApiInterface.getFilterByName(name);
+
+    public Single<MealsModelResponse> getFilterByIngredient(String ingredient){
+        return mealsApiInterface.getFilterByIngredient(ingredient);
+    }
+
+    public Single<MealsModelResponse> getSearchMealsByName(String name){
+        return mealsApiInterface.getSearchMealsByName(name);
+    }
+
+    public Single<MealsModelResponse> getSearchMealsByID(String id){
+        return mealsApiInterface.getSearchMealsByID(id);
+    }
+
+    public Single<MealsModelResponse> getSearchMealsByFirstLetter(String firstLetter){
+        return mealsApiInterface.getSearchMealsByFirstLetter(firstLetter);
     }
 }

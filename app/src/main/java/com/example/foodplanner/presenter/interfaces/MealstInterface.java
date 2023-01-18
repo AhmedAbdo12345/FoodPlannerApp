@@ -1,10 +1,11 @@
 package com.example.foodplanner.presenter.interfaces;
 
-import com.example.foodplanner.model.ModelClasses.MealsModel;
+import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface MealstInterface {
-    void getSuccessMealsFromApi(ArrayList<MealsModel> body);
     void getFailureMealsFromApi(String  message);
+    void getSuccessMealsFromApi(List<MealsModelResponse> mealsModelRequestList);
+
 }
