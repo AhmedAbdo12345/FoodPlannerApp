@@ -21,6 +21,7 @@
             <ImageView
                 android:id="@+id/img_category"
                 android:layout_width="match_parent"
+                android:src="@drawable/pizza"
                 android:layout_height="400dp"
                 android:layout_weight="4"
                 android:scaleType="centerCrop" />
