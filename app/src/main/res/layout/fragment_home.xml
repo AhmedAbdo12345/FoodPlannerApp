@@ -33,15 +33,15 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_randomMeal"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_width="413dp"
+            android:layout_height="270dp"
             android:layout_below="@+id/tv_categories"
-            tools:listitem="@layout/rv_random_meals"
             android:layout_marginTop="9dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardSearch" />
+            app:layout_constraintTop_toBottomOf="@+id/cardSearch"
+            tools:listitem="@layout/rv_random_meals" />
 
         
         <TextView
