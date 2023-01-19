@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodplanner.R;
@@ -29,11 +30,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpFragment extends Fragment implements SignUpFragmentInterface {
     EditText editTextName,editTextEmail,editTextPassword;
-    Button buttonSignUp,googleBtn;
+    Button googleBtn;
     SignUpFragmentPresenter signUpFragmentPresenter;
     FirebaseAuth firebaseAuth;
     GoogleSignInClient googleSignInClient;
     GoogleAuth googleAuth;
+
+    TextView tvAlreadyHaveAccount;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,24 +58,31 @@ public class SignUpFragment extends Fragment implements SignUpFragmentInterface 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+      /*  tvAlreadyHaveAccount=view.findViewById(R.id.tv_already_have_account);
+        tvAlreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_loginFragment);
 
+            }
+        });*/
         editTextName=view.findViewById(R.id.edt_name);
         editTextEmail=view.findViewById(R.id.edt_email);
         editTextPassword=view.findViewById(R.id.edt_Password);
-        buttonSignUp=view.findViewById(R.id.btn_signup);
         googleBtn=view.findViewById(R.id.btn_googleAuth);
         signUpFragmentPresenter=new SignUpFragmentPresenter(this);
-        buttonSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name=editTextName.getText().toString();
-                String email=editTextEmail.getText().toString();
-                String password=editTextPassword.getText().toString();
-                if(!name.isEmpty() && !email.isEmpty() && !password.isEmpty()){
-                    signUpFragmentPresenter.createUser(name,email,password);
-                }
-            }
-        });
+
+//        buttonSignUp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String name=editTextName.getText().toString();
+//                String email=editTextEmail.getText().toString();
+//                String password=editTextPassword.getText().toString();
+//                if(!name.isEmpty() && !email.isEmpty() && !password.isEmpty()){
+//                    signUpFragmentPresenter.createUser(name,email,password);
+//                }
+//            }
+//        });
         googleBtn = view.findViewById(R.id.btn_Login_googleAuth);
 
         googleBtn.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +92,8 @@ public class SignUpFragment extends Fragment implements SignUpFragmentInterface 
                 startActivityForResult(intent, 100);
             }
         });
+      //   Button button=view.findViewById(R.id.button_signup);
+
     }
 
 

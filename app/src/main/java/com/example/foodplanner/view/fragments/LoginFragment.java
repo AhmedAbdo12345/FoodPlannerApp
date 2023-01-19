@@ -53,7 +53,7 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
     LogInFragmentPresenter logInFragmentPresenter;
     EditText email, password;
     Button login;
-    TextView forgetTV;
+    TextView forgetTV,tvCreateNewAccount;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +81,14 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
         email = view.findViewById(R.id.sign_email);
         password = view.findViewById(R.id.sign_Password);
         login = view.findViewById(R.id.signInBtn);
+        tvCreateNewAccount=view.findViewById(R.id.tv_create_new_Account);
+        tvCreateNewAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.signUpFragment);
+
+            }
+        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

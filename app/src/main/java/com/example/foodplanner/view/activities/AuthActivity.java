@@ -15,6 +15,7 @@ NavController navController;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
+
         navController= Navigation.findNavController(this,R.id.nav_host_Auth_fragment);
         NavigationUI.setupActionBarWithNavController(this,navController);
     }
