@@ -2,6 +2,7 @@ package com.example.foodplanner.model.ModelResponse;
 
 import com.example.foodplanner.model.ModelClasses.CategoryModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CategoryModelResponse {

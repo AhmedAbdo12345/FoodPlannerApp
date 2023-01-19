@@ -100,29 +100,33 @@
             android:text="@string/sign_in"
             android:textColor="@color/white"
             android:textSize="18sp" />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="3sp"
+            android:layout_margin="5dp"
             android:text="@string/dont_have"
             android:textColor="#9e9e9e"
             android:textSize="16sp" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center"
             android:letterSpacing="-0.03"
+            android:layout_margin="5dp"
             android:lineSpacingExtra="3sp"
             android:text="@string/create_new_acc"
-            android:textColor="#EEA734"
+            android:textColor="@color/purple_500"
             android:textSize="16sp" />
-
+</LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

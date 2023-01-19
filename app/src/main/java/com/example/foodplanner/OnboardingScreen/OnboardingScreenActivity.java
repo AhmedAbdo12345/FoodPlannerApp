@@ -83,7 +83,7 @@ public class OnboardingScreenActivity extends AppCompatActivity {
             linearLayout.addView(dots[i]);
         }
 
-        dots[position].setTextColor(getResources().getColor(R.color.grey));
+        dots[position].setTextColor(getResources().getColor(R.color.purple_500));
 
     }
 

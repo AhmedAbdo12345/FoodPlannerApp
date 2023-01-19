@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/homeNav"
         android:name="com.example.foodplanner.view.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeNav_to_plansNav"
             app:destination="@id/plansNav" />
@@ -18,20 +18,32 @@
         <action
             android:id="@+id/action_homeNav_to_profileNav"
             app:destination="@id/profileNav" />
+        <action
+            android:id="@+id/action_homeNav_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileNav"
         android:name="com.example.foodplanner.view.fragments.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/favNav"
         android:name="com.example.foodplanner.view.fragments.FavouriteFragment"
-        android:label="fragment_favourite"
+        android:label="Favourite"
         tools:layout="@layout/fragment_favourite" />
     <fragment
         android:id="@+id/plansNav"
         android:name="com.example.foodplanner.view.fragments.PlanFragment"
-        android:label="fragment_plan"
+        android:label="Plan"
         tools:layout="@layout/fragment_plan" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.foodplanner.view.fragments.DetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="meal"
+            app:argType="com.example.foodplanner.model.ModelClasses.MealsModel" />
+    </fragment>
 </navigation>

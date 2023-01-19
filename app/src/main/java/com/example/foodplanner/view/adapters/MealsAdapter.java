@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodplanner.R;
@@ -31,7 +32,7 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealsViewHol
 
     public interface ListItemClickListener {
 
-        void onClickMeals(int position);
+        void onClickMeals(int position,List<MealsModelResponse> mealsModelResponses);
     }
 
     @NonNull
@@ -55,14 +56,25 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealsViewHol
         return modelArrayList.size();
     }
 
-    public class MealsViewHolder extends RecyclerView.ViewHolder {
+    public class MealsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        CardView cardView;
         ImageView imageView;
         TextView textView;
 
         public MealsViewHolder(@NonNull View itemView) {
             super(itemView);
+            cardView=itemView.findViewById(R.id.mealCard);
             imageView=itemView.findViewById(R.id.img_random_Meal);
             textView=itemView.findViewById(R.id.tv_name_random_Meal);
+            cardView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            mOnClickListener.onClickMeals( getAdapterPosition(),modelArrayList);
+
+        }
+
     }
+
 }

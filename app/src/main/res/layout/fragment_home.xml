@@ -36,72 +36,49 @@
             android:layout_width="413dp"
             android:layout_height="270dp"
             android:layout_below="@+id/tv_categories"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="9dp"
+            android:layout_marginEnd="5dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardSearch"
             tools:listitem="@layout/rv_random_meals" />
 
-        
+
         <TextView
             android:id="@+id/tv_categories"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rv_randomMeal"
-            android:layout_marginStart="10dp"
+            android:layout_margin="5dp"
             android:layout_marginTop="35dp"
-            android:layout_marginEnd="270dp"
             android:layout_marginBottom="9dp"
+            android:gravity="left"
             android:text="Categories"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/rv_categories"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/rv_randomMeal"
             app:layout_constraintTop_toBottomOf="@+id/rv_randomMeal" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_categories"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            tools:listitem="@layout/rv_categories"
-            android:layout_marginTop="9dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_categories" />
-
-
-        <TextView
-            android:id="@+id/tv_country"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rv_categories"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="303dp"
-            android:text="Country"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_categories" />
+            android:layout_height="300dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/tv_categories"
+            app:layout_constraintStart_toStartOf="@+id/tv_categories"
+            app:layout_constraintTop_toBottomOf="@+id/tv_categories"
+            tools:listitem="@layout/rv_categories" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_country"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            android:layout_below="@+id/tv_country"
-            tools:listitem="@layout/recycle_view_country_item"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_country" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
