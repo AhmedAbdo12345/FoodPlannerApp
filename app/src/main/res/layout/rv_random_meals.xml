@@ -35,7 +35,7 @@
                 android:id="@+id/tv_name_random_Meal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pizza"
+                android:text="pizza"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif-black"
                 android:textSize="30sp"
