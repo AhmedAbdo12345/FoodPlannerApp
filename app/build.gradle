@@ -40,9 +40,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-   //------------------to Using RX ------------------------
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
+
    //---------------------------------------------------
     //------------------to Using lottie for Animation ------------------------
     def lottieVersion = "3.4.0"
@@ -80,9 +78,13 @@ dependencies {
     //------------------to Using RX Adapter to using it in retrofit------------------------
     implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
     //---------------------------------------------------
+    //------------------to Using RX ------------------------
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
     //------------------to Using Logging interCepter to See retrofit response in Log ------------------------
     implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
     //---------------------------------------------------
 
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 
 }

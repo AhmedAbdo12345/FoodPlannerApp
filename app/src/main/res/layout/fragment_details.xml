@@ -14,9 +14,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:padding="15dp"
             android:orientation="vertical">
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtube_player_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/tv_title_details"
@@ -38,7 +43,7 @@
                 android:layout_height="300dp"
                 android:contentDescription="@string/app_name"
                 android:elevation="5sp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <LinearLayout
@@ -102,7 +107,8 @@
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="@+id/tv_area_details2"
                 app:layout_constraintStart_toStartOf="@+id/tv_area_details2"
-                app:layout_constraintTop_toBottomOf="@+id/tv_area_details2" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_area_details2"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
 
         </LinearLayout>
