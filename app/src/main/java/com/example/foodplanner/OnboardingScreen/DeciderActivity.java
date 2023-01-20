@@ -27,7 +27,7 @@ public class DeciderActivity extends AppCompatActivity {
         boolean seen=Shared.getBoolean("seen",false);
         // Log.d("seen",String.valueOf(seen));
         if (seen){
-           intent =new Intent(this, AuthActivity.class);
+           intent =new Intent(this, HomeActivity.class);
        } else {
 
         intent =new Intent(this,OnboardingScreenActivity.class);
