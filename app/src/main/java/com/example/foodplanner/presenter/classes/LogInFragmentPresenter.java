@@ -21,10 +21,10 @@ public class LogInFragmentPresenter {
         this.logInFragmentInterface = logInFragmentInterface;
     }
 
-    public void logIn(EditText loginEmail, EditText loginPassword){
+    public void logIn(EditText edtEmail,EditText edtPassword){
         firebaseAuth = FirebaseAuth.getInstance();
-        email = loginEmail.getText().toString();
-        password = loginPassword.getText().toString();
+        email = edtEmail.getText().toString();
+        password = edtPassword.getText().toString();
         if(!email.isEmpty()&& Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             if(!password.isEmpty()){
                 firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -40,13 +40,13 @@ public class LogInFragmentPresenter {
                             }
                         });
             } else {
-                loginPassword.setError("Please enter your password");
+                edtPassword.setError("Please enter your password");
             }
 
         } else if (email.isEmpty()){
-            loginEmail.setError("please enter your email");
+            edtEmail.setError("please enter your email");
         }else{
-            loginEmail.setError("please enter a valid email");
+            edtEmail.setError("please enter a valid email");
         }
     }
 }

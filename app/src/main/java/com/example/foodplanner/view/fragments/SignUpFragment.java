@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.presenter.classes.SignUpFragmentPresenter;
+import com.example.foodplanner.presenter.interfaces.GoogleAuthInterface;
 import com.example.foodplanner.presenter.interfaces.SignUpFragmentInterface;
 import com.example.foodplanner.utils.GoogleAuth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -28,9 +29,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignUpFragment extends Fragment implements SignUpFragmentInterface {
-    EditText editTextName,editTextEmail,editTextPassword;
-    Button googleBtn;
+public class SignUpFragment extends Fragment implements SignUpFragmentInterface , GoogleAuthInterface {
+EditText editTextName,editTextEmail,editTextPassword;
+    Button googleBtn,buttonSignUp;
     SignUpFragmentPresenter signUpFragmentPresenter;
     FirebaseAuth firebaseAuth;
     GoogleSignInClient googleSignInClient;
@@ -51,39 +52,39 @@ public class SignUpFragment extends Fragment implements SignUpFragmentInterface 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        return inflater.inflate(R.layout.fragment_sign_up, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-      /*  tvAlreadyHaveAccount=view.findViewById(R.id.tv_already_have_account);
+       tvAlreadyHaveAccount=view.findViewById(R.id.tv_already_have_account);
         tvAlreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_loginFragment);
 
             }
-        });*/
-        editTextName=view.findViewById(R.id.edt_name);
+        });
+       editTextName=view.findViewById(R.id.edt_name);
         editTextEmail=view.findViewById(R.id.edt_email);
         editTextPassword=view.findViewById(R.id.edt_Password);
         googleBtn=view.findViewById(R.id.btn_googleAuth);
+        buttonSignUp=view.findViewById(R.id.btn_signUp);
         signUpFragmentPresenter=new SignUpFragmentPresenter(this);
 
-//        buttonSignUp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String name=editTextName.getText().toString();
-//                String email=editTextEmail.getText().toString();
-//                String password=editTextPassword.getText().toString();
-//                if(!name.isEmpty() && !email.isEmpty() && !password.isEmpty()){
-//                    signUpFragmentPresenter.createUser(name,email,password);
-//                }
-//            }
-//        });
-        googleBtn = view.findViewById(R.id.btn_Login_googleAuth);
+       buttonSignUp.setOnClickListener(new View.OnClickListener() {
+           @Override
+            public void onClick(View view) {
+                String name=editTextName.getText().toString();
+                String email=editTextEmail.getText().toString();
+                String password=editTextPassword.getText().toString();
+                if(!name.isEmpty() && !email.isEmpty() && !password.isEmpty()){
+                    signUpFragmentPresenter.createUser(name,email,password);
+                }
+            }
+        });
 
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +93,6 @@ public class SignUpFragment extends Fragment implements SignUpFragmentInterface 
                 startActivityForResult(intent, 100);
             }
         });
-      //   Button button=view.findViewById(R.id.button_signup);
 
     }
 
@@ -103,7 +103,7 @@ public class SignUpFragment extends Fragment implements SignUpFragmentInterface 
         if (requestCode == 100) {
             GoogleSignInAccount result = GoogleSignIn.getSignedInAccountFromIntent(data).getResult();
             if (result != null) {
-                googleAuth.authWithGoogle(result,firebaseAuth,SignUpFragment.this,getContext());
+               googleAuth.authWithGoogle(result,firebaseAuth,SignUpFragment.this,getContext());
 
 
             }
@@ -113,14 +113,26 @@ public class SignUpFragment extends Fragment implements SignUpFragmentInterface 
 
 
     @Override
-    public void onSuccessResult() {
-        // NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_nav_grav_main);
-        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
+    public void onSuccessSignUPResult() {
+        // NavHostFragment.findNavController(this).navigate(R.id.action_signUpFragment_to_loginFragment);
+        Navigation.findNavController(getView()).navigate(R.id.action_signUpFragment_to_loginFragment);
 
     }
 
     @Override
-    public void onFailureResult(String message) {
+    public void onFailureSignUPResult(String message) {
+
+    }
+
+    @Override
+    public void onSuccessGoogleAuthResult() {
+
+        Navigation.findNavController(getView()).navigate(R.id.action_signUpFragment_to_homeActivity);
+
+    }
+
+    @Override
+    public void onFailureGoogleAuthResult(String message) {
 
     }
 }

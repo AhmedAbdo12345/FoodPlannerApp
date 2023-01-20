@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelClasses.AuthModel;
+import com.example.foodplanner.presenter.interfaces.GoogleAuthInterface;
 import com.example.foodplanner.presenter.interfaces.SignUpFragmentInterface;
 import com.example.foodplanner.view.activities.MainActivity;
 import com.example.foodplanner.view.fragments.LoginFragment;
@@ -54,7 +55,7 @@ public class GoogleAuth {
        //firebaseAuth = FirebaseAuth.getInstance();
     }
 
-    public void authWithGoogle(GoogleSignInAccount result, FirebaseAuth firebaseAuth,SignUpFragmentInterface signUpFragmentInterface,Context context) {
+    public void authWithGoogle(GoogleSignInAccount result, FirebaseAuth firebaseAuth, GoogleAuthInterface googleAuthInterface, Context context) {
         AuthCredential authCredential = GoogleAuthProvider.getCredential(result.getIdToken(), null);
         try {
             firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -69,7 +70,7 @@ public class GoogleAuth {
                             String name = user.getDisplayName().toString();
                             // SaveUserDataInFirestore(activity,user.getUid(),name,email);
                             AuthModel authModel = new AuthModel(user.getUid(), name, email);
-                            SaveUserDataInFireStore.saveDataInFStore(authModel, signUpFragmentInterface);
+                            SaveUserDataInFireStore.saveDataInFStore(authModel, googleAuthInterface);
                             Toast.makeText(context, "Gooood T.", Toast.LENGTH_SHORT).show();
 
 

@@ -26,6 +26,7 @@ import com.example.foodplanner.R;
 
 import com.example.foodplanner.model.ModelClasses.AuthModel;
 import com.example.foodplanner.presenter.classes.SignUpFragmentPresenter;
+import com.example.foodplanner.presenter.interfaces.GoogleAuthInterface;
 import com.example.foodplanner.presenter.interfaces.SignUpFragmentInterface;
 import com.example.foodplanner.utils.GoogleAuth;
 import com.example.foodplanner.utils.SaveUserDataInFireStore;
@@ -43,7 +44,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class LoginFragment extends Fragment implements SignUpFragmentInterface, LogInFragmentInterface {
+public class LoginFragment extends Fragment implements GoogleAuthInterface, LogInFragmentInterface {
 
     Button googleBtn;
     FirebaseAuth firebaseAuth;
@@ -51,9 +52,9 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
     GoogleAuth googleAuth;
 
     LogInFragmentPresenter logInFragmentPresenter;
-    EditText email, password;
-    Button login;
-    TextView forgetTV,tvCreateNewAccount;
+    EditText edtEmail, edtPassword;
+    Button btnLogin;
+    TextView tvForgotPassword,tvCreateNewAccount;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,10 +79,13 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
         super.onViewCreated(view, savedInstanceState);
 
 
-        email = view.findViewById(R.id.sign_email);
-        password = view.findViewById(R.id.sign_Password);
-        login = view.findViewById(R.id.signInBtn);
+        edtEmail = view.findViewById(R.id.edt_email_login);
+        edtPassword = view.findViewById(R.id.edt_password_login);
+        btnLogin = view.findViewById(R.id.btn_Login);
         tvCreateNewAccount=view.findViewById(R.id.tv_create_new_Account);
+        googleBtn = view.findViewById(R.id.btn_Login_googleAuth);
+        tvForgotPassword=view.findViewById(R.id.tv_forgot_password);
+
         tvCreateNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,14 +94,13 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
             }
         });
 
-        login.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                logInFragmentPresenter.logIn(email, password);
+                logInFragmentPresenter.logIn(edtEmail, edtPassword);
             }
         });
 
-        googleBtn = view.findViewById(R.id.btn_Login_googleAuth);
 
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,8 +109,7 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
                 startActivityForResult(intent, 100);
             }
         });
-        forgetTV=view.findViewById(R.id.forgetTextView);
-        forgetTV.setOnClickListener(new View.OnClickListener() {
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_forgotPasswordFragment);
@@ -134,17 +136,7 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
     }
 
 
-    @Override
-    public void onSuccessResult() {
-        // NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_nav_grav_main);
-        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
 
-    }
-
-    @Override
-    public void onFailureResult(String message) {
-
-    }
 
 
     @Override
@@ -159,6 +151,17 @@ public class LoginFragment extends Fragment implements SignUpFragmentInterface, 
     public void loginFaliure(@NonNull Exception e) {
         //navigate forget password
         Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccessGoogleAuthResult() {
+        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
+
+    }
+
+    @Override
+    public void onFailureGoogleAuthResult(String message) {
+
     }
 }
 

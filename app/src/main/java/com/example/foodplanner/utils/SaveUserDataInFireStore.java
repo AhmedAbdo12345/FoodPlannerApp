@@ -4,6 +4,7 @@ package com.example.foodplanner.utils;
 import androidx.annotation.NonNull;
 
 import com.example.foodplanner.model.ModelClasses.AuthModel;
+import com.example.foodplanner.presenter.interfaces.GoogleAuthInterface;
 import com.example.foodplanner.presenter.interfaces.SignUpFragmentInterface;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,12 +19,29 @@ public class SaveUserDataInFireStore {
             @Override
             public void onSuccess(Void unused) {
 
-                signUpFragmentInterface.onSuccessResult();
+                signUpFragmentInterface.onSuccessSignUPResult();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                signUpFragmentInterface.onFailureResult(e.getMessage().toString());
+                signUpFragmentInterface.onFailureSignUPResult(e.getMessage().toString());
+            }
+        });
+
+    }
+    public static void saveDataInFStore(AuthModel authModel, GoogleAuthInterface googleAuthInterface){
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("User").document(authModel.getUserId());
+
+        documentReference.set(authModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+                googleAuthInterface.onSuccessGoogleAuthResult();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                googleAuthInterface.onFailureGoogleAuthResult(e.getMessage().toString());
             }
         });
 

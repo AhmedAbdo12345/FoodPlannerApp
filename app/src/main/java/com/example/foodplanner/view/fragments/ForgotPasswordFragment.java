@@ -20,8 +20,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasswordFragment extends Fragment {
-    Button forgetPasswordBtn;
-    EditText email;
+    Button btnResetPassword;
+    EditText edtEmailForgetPassword;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,12 +35,12 @@ public class ForgotPasswordFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_forgot_password, container, false);
-        email=view.findViewById(R.id.sign_email);
-        forgetPasswordBtn=view.findViewById(R.id.forgetPassBtn);
-        forgetPasswordBtn.setOnClickListener(new View.OnClickListener() {
+        edtEmailForgetPassword=view.findViewById(R.id.edt_forgotPassword);
+        btnResetPassword=view.findViewById(R.id.btn_reset_password);
+        btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().sendPasswordResetEmail(email.getText().toString())
+                FirebaseAuth.getInstance().sendPasswordResetEmail(edtEmailForgetPassword.getText().toString())
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

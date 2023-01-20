@@ -61,7 +61,7 @@ public class OnboardingScreenActivity extends AppCompatActivity {
     }
 
     private void getStartedButton() {
-        GetStarted=findViewById(R.id.btn_signup);
+        GetStarted=findViewById(R.id.btn_Get_Start);
         final Intent intent=new Intent(this, AuthActivity.class);
         GetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +79,7 @@ public class OnboardingScreenActivity extends AppCompatActivity {
             dots[i]=new TextView(this);
             dots[i].setText(Html.fromHtml("&#8226;"));
             dots[i].setTextSize(50);
-            dots[i].setTextColor(getResources().getColor(R.color.white));
+            dots[i].setTextColor(getResources().getColor(R.color.grey));
             linearLayout.addView(dots[i]);
         }
 
