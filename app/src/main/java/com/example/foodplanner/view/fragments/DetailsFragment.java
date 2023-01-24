@@ -8,10 +8,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +29,8 @@ public class DetailsFragment extends Fragment {
     ImageView imgMeal;
     TextView tvTitleMeal, tvCategoryMeal, tvInstructions, tvArea;
     YouTubePlayerView youTubePlayerView;
-
+    Button buttonAddPlan;
+    MealsModel model;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +47,14 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         imgMeal = view.findViewById(R.id.img_meal_details);
         tvTitleMeal = view.findViewById(R.id.tv_title_details);
         tvCategoryMeal = view.findViewById(R.id.tv_meal_category_details);
         tvInstructions = view.findViewById(R.id.tv_instructions_details);
         tvArea = view.findViewById(R.id.tv_area_details);
-        MealsModel model = DetailsFragmentArgs.fromBundle(getArguments()).getMeal();
+        buttonAddPlan=view.findViewById(R.id.btn_Plan);
+         model = DetailsFragmentArgs.fromBundle(getArguments()).getMeal();
         tvTitleMeal.setText(model.getStrMeal());
         tvCategoryMeal.setText(model.getStrCategory());
         tvInstructions.setText(model.getStrInstructions());
@@ -71,7 +76,15 @@ public class DetailsFragment extends Fragment {
             }
         });
         /*----------------------------------------------------------*/
-
+        buttonAddPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (model !=null) {
+                    DetailsFragmentDirections.ActionDetailsFragmentToChoicePlanFragment action = DetailsFragmentDirections.actionDetailsFragmentToChoicePlanFragment(model);
+                    Navigation.findNavController(getView()).navigate(action);
+                }
+            }
+        });
     }
 
 
