@@ -81,10 +81,17 @@ dependencies {
     //------------------to Using RX ------------------------
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
     implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
+    //---------------------------------------------------
+    //------------------to Using RX With Room------------------------
+    implementation "androidx.room:room-rxjava3:2.4.0"
+    //---------------------------------------------------
     //------------------to Using Logging interCepter to See retrofit response in Log ------------------------
     implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
     //---------------------------------------------------
-
+    //------------------to Play Youtube Video in APP ------------------------
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
+    //---------------------------------------------------
+
+
 
 }

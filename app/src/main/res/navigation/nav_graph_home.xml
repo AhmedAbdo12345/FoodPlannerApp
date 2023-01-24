@@ -45,5 +45,17 @@
         <argument
             android:name="meal"
             app:argType="com.example.foodplanner.model.ModelClasses.MealsModel" />
+        <action
+            android:id="@+id/action_detailsFragment_to_choicePlanFragment"
+            app:destination="@id/choicePlanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/choicePlanFragment"
+        android:name="com.example.foodplanner.view.fragments.ChoicePlanFragment"
+        android:label="fragment_choice_plan"
+        tools:layout="@layout/fragment_choice_plan" >
+        <argument
+            android:name="meal"
+            app:argType="com.example.foodplanner.model.ModelClasses.MealsModel" />
     </fragment>
 </navigation>
