@@ -62,7 +62,7 @@ public class OnboardingScreenActivity extends AppCompatActivity {
 
     private void getStartedButton() {
         GetStarted=findViewById(R.id.btn_Get_Start);
-        final Intent intent=new Intent(this, HomeActivity.class);
+        final Intent intent=new Intent(this, AuthActivity.class);
         GetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
