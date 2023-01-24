@@ -1,18 +1,17 @@
-package com.example.foodplanner.database.room;
+package com.example.foodplanner.model.database.favourite;
 
 import android.content.Context;
 
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.foodplanner.database.favourite.FavDao;
-import com.example.foodplanner.database.plan.PlanDao;
+import com.example.foodplanner.model.database.plan.DaoMeals;
 
 public abstract class RoomObject extends RoomDatabase {
 
     private static Builder<RoomObject> roomObject = null;
     public abstract FavDao favDao();
-    public abstract PlanDao planDao();
+    public abstract DaoMeals planDao();
 
     public static synchronized Builder<RoomObject> getInstance(Context context){
         if(roomObject == null){
