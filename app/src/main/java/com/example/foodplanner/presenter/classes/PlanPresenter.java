@@ -2,7 +2,7 @@ package com.example.foodplanner.presenter.classes;
 
 import android.content.Context;
 
-import com.example.foodplanner.model.database.PlanMealsModel;
+import com.example.foodplanner.model.database.plan.PlanMealsModel;
 import com.example.foodplanner.presenter.interfaces.PlanInterface;
 import com.example.foodplanner.presenter.repository.PlanRepository;
 

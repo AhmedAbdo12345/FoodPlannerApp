@@ -3,10 +3,9 @@ package com.example.foodplanner.presenter.repository;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.foodplanner.model.database.DaoMeals;
-import com.example.foodplanner.model.database.DatabaseMeals;
-import com.example.foodplanner.model.database.PlanMealsModel;
-import com.example.foodplanner.presenter.interfaces.PlanInterface;
+import com.example.foodplanner.model.database.plan.DaoMeals;
+import com.example.foodplanner.model.database.plan.DatabaseMeals;
+import com.example.foodplanner.model.database.plan.PlanMealsModel;
 
 import java.util.List;
 

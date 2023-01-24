@@ -1,4 +1,4 @@
-package com.example.foodplanner.model.database;
+package com.example.foodplanner.model.database.plan;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -20,10 +20,10 @@ public class PlanMealsModel {
     private String strInstructions;
     private String strMealThumb;
     private String strYoutube;
-    private ArrayList<String> days;
-    private ArrayList<MealsTypeModel> mealsTypes;
+  /*  private ArrayList<String> days;
+    private ArrayList<MealsTypeModel> mealsTypes;*/
 
-    public PlanMealsModel(@NonNull String userId, String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, ArrayList<String> days, ArrayList<MealsTypeModel> mealsTypes) {
+    public PlanMealsModel(@NonNull String userId, String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube) {
         this.userId = userId;
         this.idMeal = idMeal;
         this.strMeal = strMeal;
@@ -32,8 +32,7 @@ public class PlanMealsModel {
         this.strInstructions = strInstructions;
         this.strMealThumb = strMealThumb;
         this.strYoutube = strYoutube;
-        this.days = days;
-        this.mealsTypes = mealsTypes;
+
     }
 
     public void setUserId(@NonNull String userId) {
@@ -68,13 +67,7 @@ public class PlanMealsModel {
         this.strYoutube = strYoutube;
     }
 
-    public void setDays(ArrayList<String> days) {
-        this.days = days;
-    }
 
-    public void setMealsTypes(ArrayList<MealsTypeModel> mealsTypes) {
-        this.mealsTypes = mealsTypes;
-    }
 
     @NonNull
     public String getUserId() {
@@ -109,11 +102,7 @@ public class PlanMealsModel {
         return strYoutube;
     }
 
-    public ArrayList<String> getDays() {
-        return days;
-    }
 
-    public ArrayList<MealsTypeModel> getMealsTypes() {
-        return mealsTypes;
-    }
+
+
 }

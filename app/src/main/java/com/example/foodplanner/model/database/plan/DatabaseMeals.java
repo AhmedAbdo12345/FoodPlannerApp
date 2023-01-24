@@ -1,4 +1,4 @@
-package com.example.foodplanner.model.database;
+package com.example.foodplanner.model.database.plan;
 
 
 import android.content.Context;
