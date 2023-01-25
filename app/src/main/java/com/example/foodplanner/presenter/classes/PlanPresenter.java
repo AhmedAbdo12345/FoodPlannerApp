@@ -15,7 +15,6 @@ public class PlanPresenter implements PlanInterface{
 PlanRepository planRepository;
     public PlanPresenter(Context context){
         planRepository=new PlanRepository(context);
-
     }
 
    /* private Single<List<PlanMealsModel>> getAllPlan(){

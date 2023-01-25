@@ -9,20 +9,19 @@ import androidx.room.PrimaryKey;
 @Entity
 public class FavModel {
     @PrimaryKey
-    @NonNull String favId;
+    @NonNull
+    private String favId;
     private String favName;
-    private String favRecipe;
-    private String favSteps;
+    private String favCateogry;
     private String favImg;
-    private String favYoutube;
 
-    public FavModel(@NonNull String favId, String favName, String favRecipe, String favSteps, String favImg, String favYoutube) {
+
+    public FavModel(@NonNull String favId, String favName, String favCateogry, String favImg) {
         this.favId = favId;
         this.favName = favName;
-        this.favRecipe = favRecipe;
-        this.favSteps = favSteps;
+       this.favCateogry = favCateogry;
         this.favImg = favImg;
-        this.favYoutube = favYoutube;
+
     }
 
     @NonNull
@@ -34,19 +33,12 @@ public class FavModel {
         return favName;
     }
 
-    public String getFavRecipe() {
-        return favRecipe;
-    }
-
-    public String getFavSteps() {
-        return favSteps;
+    public String getFavCateogry() {
+        return favCateogry;
     }
 
     public String getFavImg() {
         return favImg;
     }
 
-    public String getFavYoutube() {
-        return favYoutube;
-    }
 }

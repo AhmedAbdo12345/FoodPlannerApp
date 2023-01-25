@@ -1,8 +1,5 @@
 package com.example.foodplanner.view.fragments;
 
-import android.graphics.BitmapFactory;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,12 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelClasses.MealsModel;
 
+import com.example.foodplanner.model.database.favourite.FavDao;
+import com.example.foodplanner.model.database.favourite.FavModel;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -31,6 +31,10 @@ public class DetailsFragment extends Fragment {
     YouTubePlayerView youTubePlayerView;
     Button buttonAddPlan;
     MealsModel model;
+    ImageButton fav, unFav;
+    FavDao favDao;
+    FavModel favModel;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +58,41 @@ public class DetailsFragment extends Fragment {
         tvInstructions = view.findViewById(R.id.tv_instructions_details);
         tvArea = view.findViewById(R.id.tv_area_details);
         buttonAddPlan=view.findViewById(R.id.btn_Plan);
+
          model = DetailsFragmentArgs.fromBundle(getArguments()).getMeal();
         tvTitleMeal.setText(model.getStrMeal());
         tvCategoryMeal.setText(model.getStrCategory());
         tvInstructions.setText(model.getStrInstructions());
         tvArea.setText(model.getStrArea());
 
+
+      favModel = new FavModel(model.getIdMeal(), model.getStrMeal(), model.getStrCategory(),model.getStrMealThumb());
+
+
+        fav = view.findViewById(R.id.favBtn);
+        unFav = view.findViewById(R.id.unfavBtn);
+
         if (model.getStrMealThumb() != null) {
             Picasso.get().load(model.getStrMealThumb()).into(imgMeal);
         }
 //----------------------------------
+
+        //add and remove fav
+        fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favDao.inserFavtMeal(favModel);
+            }
+        });
+
+        unFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favDao.deleteFavMeal(favModel);
+            }
+        });
+
+
         youTubePlayerView = view.findViewById(R.id.youtube_player_view);
         getLifecycle().addObserver(youTubePlayerView);
 

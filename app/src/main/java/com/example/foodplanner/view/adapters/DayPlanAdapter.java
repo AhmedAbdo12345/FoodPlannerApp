@@ -60,6 +60,7 @@ public class DayPlanAdapter extends RecyclerView.Adapter<DayPlanAdapter.PlanView
         LinearLayout linearLayoutMeals;
 
         public PlanViewHolder(@NonNull View itemView) {
+            //row
             super(itemView);
             textViewDays = itemView.findViewById(R.id.tv_days);
             switchCompatBreakFast = itemView.findViewById(R.id.breakfastSwitchCompat);

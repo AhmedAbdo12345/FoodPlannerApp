@@ -34,13 +34,16 @@
 
             <LinearLayout
                 android:layout_weight="6"
+                android:weightSum="4"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" >
 
                 <TextView
                     android:layout_width="match_parent"
+                    android:id="@+id/mealTitle"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".5"
                     android:text="Fresh Corn Omelet"
                     android:textColor="#FF018786"
                     android:textStyle="bold"
@@ -48,30 +51,13 @@
                 />
 
                 <TextView
+                    android:id="@+id/mealDesc"
+                    android:layout_weight="3.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="This meal contains of eggs nad tomatao , fkkfjkjkjfkjfklfklkflklkflkf"
                     />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RatingBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:rating="3.4"
-                        style="?android:attr/ratingBarStyleIndicator"
-                        android:progressTint="#FF018786"
-                        android:id="@+id/smallRating"
-                        />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/close" />
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

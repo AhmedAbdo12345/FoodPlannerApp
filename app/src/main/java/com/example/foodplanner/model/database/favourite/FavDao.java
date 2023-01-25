@@ -11,16 +11,16 @@ import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 
 public interface FavDao {
-    @Query("select * from favmodel")
-    Single<List<FavModel>> getFavs();
+    @Query("SELECT * FROM FavModel")
+    public Single<List<FavModel>> loadAllFavs();
 
-    @Query("select * from favmodel where favName LIKE :name")
-    Single<FavModel> getFav(String name);
+    @Query("SELECT * FROM FavModel where favName LIKE :name")
+    public Single<FavModel> getFav(String name);
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    Completable insertMeal (FavModel favModel);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public Completable inserFavtMeal (FavModel favModel);
 
     @Delete
-    Completable deleteMeal(FavModel favModel);
+   public Completable deleteFavMeal(FavModel favModel);
 
 }
