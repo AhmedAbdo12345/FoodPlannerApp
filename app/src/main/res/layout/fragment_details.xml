@@ -46,10 +46,6 @@
                 android:scaleType="fitXY"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_instructions_details"
@@ -60,14 +56,6 @@
                     android:textColor="#000"
                     android:textSize="22sp" />
 
-                <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="60dp"
-                    android:layout_height="49dp"
-                    android:backgroundTint="@color/white"
-                    android:contentDescription="FavouriteButton"
-                    app:srcCompat="@android:drawable/star_on"
-                    tools:layout_editor_absoluteY="316dp" />
 
                 <ImageButton
                     android:id="@+id/unfavouriteButton2"
@@ -78,8 +66,14 @@
                     android:contentDescription="UnFavouriteButton"
                     app:srcCompat="@android:drawable/star_off" />
 
-
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="60dp"
+                android:layout_height="49dp"
+                android:backgroundTint="@color/white"
+                android:contentDescription="FavouriteButton"
+                app:srcCompat="@android:drawable/star_on"
+                tools:layout_editor_absoluteY="316dp" />
 
             <TextView
                 android:id="@+id/tv_meal_category_details"

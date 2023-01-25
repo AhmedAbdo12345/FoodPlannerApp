@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,14 +65,24 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MealsV
         return categoryModelResponses.getCategories().size();
     }
 
-    public class MealsViewHolder extends RecyclerView.ViewHolder {
+    public class MealsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imageView;
         TextView textView;
-
+CardView cardView;
         public MealsViewHolder(@NonNull View itemView) {
             super(itemView);
+            cardView=itemView.findViewById(R.id.categoryCard);
+
             imageView=itemView.findViewById(R.id.img_category);
             textView=itemView.findViewById(R.id.tv_name_category);
+
+            cardView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnClickListener.onClickCategory( getAdapterPosition());
+
         }
     }
 }

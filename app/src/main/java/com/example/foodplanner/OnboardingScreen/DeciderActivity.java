@@ -10,6 +10,8 @@ import android.os.Bundle;
 import com.example.foodplanner.view.activities.AuthActivity;
 import com.example.foodplanner.view.activities.HomeActivity;
 import com.example.foodplanner.view.activities.MainActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class DeciderActivity extends AppCompatActivity {
     Intent intent;
@@ -27,12 +29,23 @@ public class DeciderActivity extends AppCompatActivity {
         boolean seen=Shared.getBoolean("seen",false);
         // Log.d("seen",String.valueOf(seen));
         if (seen){
-           intent =new Intent(this, AuthActivity.class);
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser != null) {
+                //user signed in
+                    startActivity(new Intent(this, HomeActivity.class));
+                    this.finish();
+
+            }else {
+                intent =new Intent(this, AuthActivity.class);
+                startActivity(intent);
+
+            }
        } else {
 
         intent =new Intent(this,OnboardingScreenActivity.class);
-         }
-        startActivity(intent);
+            startActivity(intent);
+
+        }
 
 
     }

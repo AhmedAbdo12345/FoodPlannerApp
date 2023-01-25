@@ -17,15 +17,20 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealsViewHolder> {
-    private List<MealsModelResponse> modelArrayList;
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MealsViewHolder> {
+    private MealsModelResponse modelResponse;
     Context context;
-    final private MealsAdapter.ListItemClickListener mOnClickListener;
+     private SearchAdapter.ListItemClickListener mOnClickListener;
 
-    public MealsAdapter(List<MealsModelResponse> mealsModelResponses, Context applicationContext, MealsAdapter.ListItemClickListener mOnClickListener ) {
-        this.modelArrayList = mealsModelResponses;
+    public SearchAdapter(MealsModelResponse mealsModelResponses, Context applicationContext, SearchAdapter.ListItemClickListener mOnClickListener ) {
+        this.modelResponse = mealsModelResponses;
         this.context = applicationContext;
         this.mOnClickListener = mOnClickListener;
+
+    }
+    public SearchAdapter(MealsModelResponse mealsModelResponses, Context applicationContext) {
+        this.modelResponse = mealsModelResponses;
+        this.context = applicationContext;
 
     }
 
@@ -36,23 +41,28 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealsViewHol
 
     @NonNull
     @Override
-    public MealsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new MealsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_random_meals, parent, false));
+    public SearchAdapter.MealsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new SearchAdapter.MealsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_random_meals, parent, false));
 
-        }
+    }
 
     @Override
-    public void onBindViewHolder(@NonNull MealsViewHolder holder, int position) {
-        if(modelArrayList.get(position).getMeals().get(0).getStrMealThumb() !=null) {
-            Picasso.get().load(modelArrayList.get(position).getMeals().get(0).getStrMealThumb()).into(holder.imageView);
+    public void onBindViewHolder(@NonNull SearchAdapter.MealsViewHolder holder, int position) {
+        if(modelResponse.getMeals().get(0).getStrMealThumb() !=null) {
+            Picasso.get().load(modelResponse.getMeals().get(position).getStrMealThumb()).into(holder.imageView);
         }
-        holder.textView.setText(modelArrayList.get(position).getMeals().get(0).getStrMeal());
+        holder.textView.setText(modelResponse.getMeals().get(position).getStrMeal());
 
     }
 
     @Override
     public int getItemCount() {
-        return modelArrayList.size();
+        if (modelResponse.getMeals() != null){
+            return modelResponse.getMeals().size();
+
+        }else {
+            return 0;
+        }
     }
 
     public class MealsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -70,10 +80,11 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealsViewHol
 
         @Override
         public void onClick(View view) {
-            mOnClickListener.onClickMeals( getAdapterPosition(),modelArrayList);
+         //   mOnClickListener.onClickMeals( getAdapterPosition(),modelResponse);
 
         }
 
     }
 
 }
+

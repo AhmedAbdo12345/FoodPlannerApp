@@ -3,19 +3,21 @@ package com.example.foodplanner.model.ModelClasses;
 import java.util.ArrayList;
 
 public class PlanModel {
-    private String firebaseID;
     private String userId;
     private String idMeal;
     private String strMeal;
-    private String strCategory;
-    private String strArea;
-    private String strInstructions;
     private String strMealThumb;
-    private String strYoutube;
-    private ArrayList<String> days;
-    private ArrayList<MealsTypeModel> mealsTypes;
+ /*   private ArrayList<String> days;
+    private ArrayList<MealsTypeModel> mealsTypes;*/
 
-    public PlanModel(String firebaseID, String userId, String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, ArrayList<String> days, ArrayList<MealsTypeModel> mealsTypes) {
+    public PlanModel(String userId, String idMeal, String strMeal, String strMealThumb) {
+        this.userId = userId;
+        this.idMeal = idMeal;
+        this.strMeal = strMeal;
+        this.strMealThumb = strMealThumb;
+    }
+
+   /*public PlanModel(String firebaseID, String userId, String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, ArrayList<String> days, ArrayList<MealsTypeModel> mealsTypes) {
         this.firebaseID = firebaseID;
         this.userId = userId;
         this.idMeal = idMeal;
@@ -27,11 +29,8 @@ public class PlanModel {
         this.strYoutube = strYoutube;
         this.days = days;
         this.mealsTypes = mealsTypes;
-    }
+    }*/
 
-    public String getFirebaseID() {
-        return firebaseID;
-    }
 
     public String getUserId() {
         return userId;
@@ -45,7 +44,7 @@ public class PlanModel {
         return strMeal;
     }
 
-    public String getStrCategory() {
+   /* public String getStrCategory() {
         return strCategory;
     }
 
@@ -71,5 +70,5 @@ public class PlanModel {
 
     public ArrayList<MealsTypeModel> getMealsTypes() {
         return mealsTypes;
-    }
+    }*/
 }

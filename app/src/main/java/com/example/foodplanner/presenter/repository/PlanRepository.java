@@ -28,6 +28,7 @@ public class PlanRepository {
         daoMeals = db.taskDao();
         listLiveData = daoMeals.loadAllData();
     }
+
     public Single<List<PlanMealsModel>> getAllPlansFromDatabase() {
         return listLiveData;
     }

@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_homeNav_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_homeNav_to_choiceSearchByFragment"
+            app:destination="@id/choiceSearchByFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileNav"
@@ -57,5 +60,23 @@
         <argument
             android:name="meal"
             app:argType="com.example.foodplanner.model.ModelClasses.MealsModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/choiceSearchByFragment"
+        android:name="com.example.foodplanner.view.fragments.ChoiceSearchByFragment"
+        android:label="Search by"
+        tools:layout="@layout/fragment_choice_search_by">
+        <action
+            android:id="@+id/action_choiceSearchByFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.foodplanner.view.fragments.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <argument
+            android:name="seachBy"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -1,19 +1,25 @@
 package com.example.foodplanner.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelClasses.MealsModel;
@@ -23,9 +29,9 @@ import com.example.foodplanner.presenter.classes.CategoryPresenter;
 import com.example.foodplanner.presenter.classes.MealsPresenter;
 import com.example.foodplanner.presenter.interfaces.CategoryInterface;
 import com.example.foodplanner.presenter.interfaces.MealstInterface;
-import com.example.foodplanner.utils.ConstantsClass;
 import com.example.foodplanner.view.adapters.CategoryAdapter;
 import com.example.foodplanner.view.adapters.MealsAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -34,13 +40,14 @@ public class HomeFragment extends Fragment implements MealstInterface , Category
 ,CategoryAdapter.ListItemClickListener{
     MealsPresenter mealsPresenter;
     CategoryPresenter categoryPresenter;
-
+EditText editTextSearch;
     RecyclerView recyclerView_random,recyclerView_category;
     MealsAdapter mealsAdapter;
     CategoryAdapter categoryAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
     }
 
@@ -54,6 +61,9 @@ public class HomeFragment extends Fragment implements MealstInterface , Category
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
         recyclerView_random = view.findViewById(R.id.rv_randomMeal);
         recyclerView_category=view.findViewById(R.id.rv_categories);
 
@@ -62,8 +72,32 @@ public class HomeFragment extends Fragment implements MealstInterface , Category
 
         categoryPresenter=new CategoryPresenter(this);
         categoryPresenter.getCategories();
+
+        editTextSearch=view.findViewById(R.id.edt_search_id);
+        editTextSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Navigation.findNavController(getView()).navigate(R.id.choiceSearchByFragment);
+            }
+        });
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
     @Override
@@ -75,12 +109,7 @@ public class HomeFragment extends Fragment implements MealstInterface , Category
     public void getSuccessMealsFromApi(List<MealsModelResponse> mealsModelRequestList) {
         if (mealsModelRequestList.size() >0){
             Log.i("zxc", mealsModelRequestList.toString());
-            for (int i=0;i<mealsModelRequestList.size();i++){
-              //  Log.i("zxc",String.valueOf( mealsModelRequestList.get(0).getMealsModelRequest().size()));
-//                Log.i("zxcv", mealsModelRequestList.get(0).getMealsModelRequest().get(0).getStrCategory());
 
-            }
-           // textView.setText(mealsModelRequestList.get(0).getMealsModelRequest().get(0).getStrCategory());
             recyclerView_random.setHasFixedSize(true);
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
             gridLayoutManager.setOrientation(RecyclerView.HORIZONTAL);

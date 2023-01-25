@@ -18,12 +18,26 @@ import android.widget.Toast;
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelClasses.MealsModel;
 import com.example.foodplanner.model.ModelClasses.MealsTypeModel;
+import com.example.foodplanner.model.ModelClasses.PModel;
+import com.example.foodplanner.model.ModelClasses.PlanModel;
 import com.example.foodplanner.presenter.classes.PlanPresenter;
 import com.example.foodplanner.view.adapters.DayPlanAdapter;
+import com.example.foodplanner.presenter.interfaces.DaySelectedInterface;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ChoicePlanFragment extends Fragment {
+public class ChoicePlanFragment extends Fragment implements  DaySelectedInterface {
+    Map<String, PlanModel> mapMeal = new HashMap<>();
+    PlanModel planModel;
+    Map<String,PModel> modelMap=new HashMap<>();
+ArrayList<Integer> arrayListActivePosition=new ArrayList<>();
     Button buttonAddNewPlan;
     ArrayList<String> daysArrayList = new ArrayList<>();
     ArrayList<MealsTypeModel> mealsTypeModelArrayList = new ArrayList<>();
@@ -52,76 +66,85 @@ PlanPresenter planPresenter;
         mealsModel = DetailsFragmentArgs.fromBundle(getArguments()).getMeal();
         planPresenter=new PlanPresenter(getContext());
         buttonAddNewPlan = view.findViewById(R.id.btn_AddNewPlann);
+
          recyclerView = view.findViewById(R.id.planRecycleView);
-        DayPlanAdapter dayCardViewAdapter = new DayPlanAdapter(days);
+        DayPlanAdapter dayCardViewAdapter = new DayPlanAdapter(days,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(dayCardViewAdapter);
+         planModel=new PlanModel(FirebaseAuth.getInstance().getUid(),mealsModel.getIdMeal(),mealsModel.getStrMeal(),mealsModel.getStrMealThumb());
 
-       /* buttonAddNewPlan.setOnClickListener(new View.OnClickListener() {
+        buttonAddNewPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 buttonAddNewPlan.setEnabled(false);
-                getDataFromRecyclerView(v);
-                PlanMealsModel planModel = new PlanMealsModel( FirebaseAuth.getInstance().getCurrentUser().getUid(),
-                        mealsModel.getIdMeal(), mealsModel.getStrMeal(), mealsModel.getStrCategory()
-                        , mealsModel.getStrArea(), mealsModel.getStrInstructions(), mealsModel.getStrMealThumb(), mealsModel.getStrYoutube(), daysArrayList, mealsTypeModelArrayList);
 
-                planPresenter.insertPlan(planModel);
-              //  AddNewPlan();
+                if (getDataFromRecyclerView(v)){
+                   // AddNewPlan();
+                }
 
 
             }
-        });*/
+        });
     }
-void getDataFromRecyclerView(View v){
-    for (int i = 0; i < recyclerView.getAdapter().getItemCount(); i++) {
-        MealsTypeModel mealsTypeModel = new MealsTypeModel();
-        int counter = 0;
-        v = recyclerView.getChildAt(i);
+boolean getDataFromRecyclerView(View v){
+        boolean haveDaySelected=false;
+    int minimumClick=0;
+    for (int i=0;i<arrayListActivePosition.size();i++){
+     //   Log.i("zxcv", "onClick: "+arrayListActivePosition.get(i).toString());
+        v=recyclerView.getChildAt(arrayListActivePosition.get(i));
+        switchCompatDays=v.findViewById(R.id.daySwitchCompat);
 
-        switchCompatDays = v.findViewById(R.id.daySwitchCompat);
-        switchCompatBreakFast = v.findViewById(R.id.breakfastSwitchCompat);
-        switchCompatLunch = v.findViewById(R.id.lunchSwitchCompat);
-        switchCompatDinner = v.findViewById(R.id.dinnerSwitchCompat);
+
+        //Map<String, PlanModel> mapMeal = new HashMap<>();
+       // MealsTypeModel mealsTypeModel = new MealsTypeModel();
+        int counter = 0;
+
         if (switchCompatDays.isChecked()) {
-            daysArrayList.add(days[i]);
+            switchCompatBreakFast =(SwitchCompat) v.findViewById(R.id.breakfastSwitchCompat);
+            switchCompatLunch = (SwitchCompat)v.findViewById(R.id.lunchSwitchCompat);
+            switchCompatDinner =(SwitchCompat) v.findViewById(R.id.dinnerSwitchCompat);
+            daysArrayList.add(days[arrayListActivePosition.get(i)]);
 
             if (switchCompatBreakFast.isChecked()) {
-                mealsTypeModel.setBreakfast("BreakFast");
+                mapMeal.put("Breakfast",planModel);
+
+               // mealsTypeModel.setBreakfast("BreakFast");
                 counter++;
             }
 
             if (switchCompatLunch.isChecked()) {
-                mealsTypeModel.setLunch("Lunch");
+                mapMeal.put("Lunch", planModel);
+                //mealsTypeModel.setLunch("Lunch");
                 counter++;
-
             }
 
             if (switchCompatDinner.isChecked()) {
-                mealsTypeModel.setDinner("Dinner");
+                mapMeal.put("Dinner", planModel);
+               // mealsTypeModel.setDinner("Dinner");
                 counter++;
-
             }
             if (counter > 0) {
-                mealsTypeModelArrayList.add(mealsTypeModel);
+                haveDaySelected=true;
+                PModel pModel=new PModel(days[arrayListActivePosition.get(i)],mapMeal);
+                modelMap.put(days[arrayListActivePosition.get(i)],pModel);
+                unchickSwitch();
+              //  mealsTypeModelArrayList.add(mealsTypeModel);
             } else {
                 Toast.makeText(getContext(), "Please Choice Type of Meal", Toast.LENGTH_SHORT).show();
-                mealsTypeModelArrayList.clear();
-                daysArrayList.clear();
+              //  mealsTypeModelArrayList.clear();
+              //  daysArrayList.clear();
             }
+
         }
     }
-
+return haveDaySelected;
 }
-  /*  public void AddNewPlan() {
+    public void AddNewPlan() {
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = firestore.collection("Plan").document();
-        PlanModel planModel = new PlanModel(documentReference.getId(), FirebaseAuth.getInstance().getCurrentUser().getUid(),
-                mealsModel.getIdMeal(), mealsModel.getStrMeal(), mealsModel.getStrCategory()
-                , mealsModel.getStrArea(), mealsModel.getStrInstructions(), mealsModel.getStrMealThumb(), mealsModel.getStrYoutube(), daysArrayList, mealsTypeModelArrayList);
+        DocumentReference documentReference = firestore.collection("Plan").document(FirebaseAuth.getInstance().getUid());
 
-        documentReference.set(planModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+        documentReference.set(modelMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -136,8 +159,53 @@ void getDataFromRecyclerView(View v){
 
             }
         });
-}*/
+}
+
+void unchickSwitch(){
+    switchCompatDays.setChecked(false);
+    switchCompatBreakFast.setChecked(false);
+    switchCompatLunch.setChecked(false);
+    switchCompatDinner.setChecked(false);
+}
+  /*  @Override
+    public void onClickDay(String day, int position) {
+        if (arrayListActivePosition.contains(position) == false){
+            arrayListActivePosition.add(position);
+
+        }
+    }*/
 
 
+    @Override
+    public void onBreakfastSelected(String day, boolean seleted) {
+        if (seleted){
+            mapMeal.put("Breakfast",planModel);
+        }else {
+            mapMeal.remove("Breakfast");
+        }
+    }
+    @Override
+    public void onLunchSelected(String day, boolean seleted) {
+        if (seleted){
+            mapMeal.put("Lunch",planModel);
+        }else {
+            mapMeal.remove("Lunch");
+        }
+    }
 
+    @Override
+    public void onDinnerSelected(String day, boolean seleted) {
+        if (seleted){
+            mapMeal.put("Dinner",planModel);
+        }else {
+            mapMeal.remove("Dinner");
+        }
+    }
+
+    @Override
+    public void onDaySelected(String name, boolean added) {
+if (added == false){
+
+}
+    }
 }
