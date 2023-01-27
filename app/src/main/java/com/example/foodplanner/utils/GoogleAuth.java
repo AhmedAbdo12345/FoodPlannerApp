@@ -68,6 +68,8 @@ public class GoogleAuth {
                         if (user != null) {
                             String email = user.getEmail().toString();
                             String name = user.getDisplayName().toString();
+                            ConstantsClass.setEMAIL(email);
+
                             // SaveUserDataInFirestore(activity,user.getUid(),name,email);
                             AuthModel authModel = new AuthModel(user.getUid(), name, email);
                             SaveUserDataInFireStore.saveDataInFStore(authModel, googleAuthInterface);

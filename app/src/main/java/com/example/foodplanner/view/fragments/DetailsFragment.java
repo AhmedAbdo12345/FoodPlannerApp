@@ -10,12 +10,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelClasses.MealsModel;
@@ -31,6 +33,7 @@ public class DetailsFragment extends Fragment {
     YouTubePlayerView youTubePlayerView;
     Button buttonAddPlan;
     MealsModel model;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +56,8 @@ public class DetailsFragment extends Fragment {
         tvCategoryMeal = view.findViewById(R.id.tv_meal_category_details);
         tvInstructions = view.findViewById(R.id.tv_instructions_details);
         tvArea = view.findViewById(R.id.tv_area_details);
-        buttonAddPlan=view.findViewById(R.id.btn_Plan);
-         model = DetailsFragmentArgs.fromBundle(getArguments()).getMeal();
+        buttonAddPlan = view.findViewById(R.id.btn_Plan);
+        model = DetailsFragmentArgs.fromBundle(getArguments()).getMeal();
         tvTitleMeal.setText(model.getStrMeal());
         tvCategoryMeal.setText(model.getStrCategory());
         tvInstructions.setText(model.getStrInstructions());
@@ -71,15 +74,19 @@ public class DetailsFragment extends Fragment {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 String[] videoId = model.getStrYoutube().split("=");
+                try {
+                    youTubePlayer.loadVideo(videoId[1], 0);
 
-                youTubePlayer.loadVideo(videoId[1], 0);
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
         /*----------------------------------------------------------*/
         buttonAddPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (model !=null) {
+                if (model != null) {
                     DetailsFragmentDirections.ActionDetailsFragmentToChoicePlanFragment action = DetailsFragmentDirections.actionDetailsFragmentToChoicePlanFragment(model);
                     Navigation.findNavController(getView()).navigate(action);
                 }

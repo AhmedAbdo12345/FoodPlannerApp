@@ -6,8 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.foodplanner.model.database.plan.PlanMealsModel;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
@@ -23,5 +22,11 @@ public interface DaoMeals {
     public Completable insertPlanData(PlanMealsModel model);
 
     @Delete
-    public Completable deletePlanData(PlanMealsModel model);
+    public Completable deletePlanMeal(PlanMealsModel model);
+
+    @Query("DELETE FROM PlanMealsModel")
+    public Completable deletePlanTable();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAllPlan(ArrayList<PlanMealsModel> planMealsModelArrayList);
 }

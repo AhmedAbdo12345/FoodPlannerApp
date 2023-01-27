@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,9 +50,9 @@ public class DayPlanAdapter extends RecyclerView.Adapter<DayPlanAdapter.PlanView
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    holder.linearLayoutMeals.setVisibility(View.VISIBLE);
+                    holder.radioGroup.setVisibility(View.VISIBLE);
                 } else {
-                    holder.linearLayoutMeals.setVisibility(View.GONE);
+                    holder.radioGroup.setVisibility(View.GONE);
 
                 }
             }
@@ -61,43 +63,49 @@ public class DayPlanAdapter extends RecyclerView.Adapter<DayPlanAdapter.PlanView
     public int getItemCount() {
         return 7;
     }
-
     public class PlanViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewDays;
-        SwitchCompat switchCompatDays, switchCompatBreakFast, switchCompatLunch, switchCompatDinner;
-        LinearLayout linearLayoutMeals;
-Button buttonAddPlan;
+        SwitchCompat switchCompatDays;
+        RadioGroup radioGroup;
+        RadioButton radioButtonBreakFast,radioButtonLunch,radioButtonDinner,radioButton;
+        Button buttonAddPlan;
         public PlanViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewDays = itemView.findViewById(R.id.tv_days);
-            switchCompatBreakFast = itemView.findViewById(R.id.breakfastSwitchCompat);
-            switchCompatLunch = itemView.findViewById(R.id.lunchSwitchCompat);
-            switchCompatDinner = itemView.findViewById(R.id.dinnerSwitchCompat);
-            linearLayoutMeals = itemView.findViewById(R.id.type_meals_layout);
-
             switchCompatDays = itemView.findViewById(R.id.daySwitchCompat);
 
-            switchCompatBreakFast.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            radioGroup = itemView.findViewById(R.id.group_radio_type_meals);
+
+            radioButtonBreakFast = itemView.findViewById(R.id.radioButton_BreakFast);
+            radioButtonLunch = itemView.findViewById(R.id.radioButton_Lunch);
+            radioButtonDinner = itemView.findViewById(R.id.radioButton_Dinner);
+
+
+           /* radioButtonBreakFast.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    daySelectedInterface.onBreakfastSelected(textViewDays.getText().toString(),isChecked);
-                }
-            });
-            switchCompatLunch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    daySelectedInterface.onLunchSelected(textViewDays.getText().toString(),isChecked);
+                   // daySelectedInterface.onBreakfastSelected(textViewDays.getText().toString(),isChecked);
+                    daySelectedInterface.onPlanSelected(textViewDays.getText().toString(),radioButtonBreakFast.getText().toString(),isChecked);
 
                 }
             });
-            switchCompatDinner.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            radioButtonLunch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    daySelectedInterface.onDinnerSelected(textViewDays.getText().toString(),isChecked);
+                   // daySelectedInterface.onLunchSelected(textViewDays.getText().toString(),isChecked);
+                    daySelectedInterface.onPlanSelected(textViewDays.getText().toString(),radioButtonLunch.getText().toString(),isChecked);
 
                 }
             });
+            radioButtonDinner.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                 //   daySelectedInterface.onDinnerSelected(textViewDays.getText().toString(),isChecked);
+                    daySelectedInterface.onPlanSelected(textViewDays.getText().toString(),radioButtonDinner.getText().toString(),isChecked);
+
+                }
+            });*/
             switchCompatDays.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -109,5 +117,7 @@ Button buttonAddPlan;
 
 
     }
+
+
 }
 

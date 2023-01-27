@@ -63,7 +63,7 @@ public class LoginFragment extends Fragment implements GoogleAuthInterface, LogI
         googleSignInClient = googleAuth.createObjFromGoogleSignInClient(getActivity());
         firebaseAuth = FirebaseAuth.getInstance();
 
-        logInFragmentPresenter = new LogInFragmentPresenter(this);
+        logInFragmentPresenter = new LogInFragmentPresenter(this,requireContext());
 
     }
 

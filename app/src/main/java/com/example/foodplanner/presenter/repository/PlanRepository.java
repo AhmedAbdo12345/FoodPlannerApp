@@ -7,6 +7,7 @@ import com.example.foodplanner.model.database.plan.DaoMeals;
 import com.example.foodplanner.model.database.plan.DatabaseMeals;
 import com.example.foodplanner.model.database.plan.PlanMealsModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -53,7 +54,7 @@ public class PlanRepository {
         });
     }
     public void deletePlan(PlanMealsModel model) {
-        daoMeals.deletePlanData(model).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
+        daoMeals.deletePlanMeal(model).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d){
 
@@ -68,4 +69,27 @@ public class PlanRepository {
             }
         });
     }
+    public void deleteTablePlan() {
+        daoMeals.deletePlanTable().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d){
+
+            }
+            @Override
+            public void onComplete() {
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        });
+    }
+
+
+    public void insertAllPlanInRoom(ArrayList<PlanMealsModel> planMealsModelArrayList){
+        new Thread(() ->
+                daoMeals.insertAllPlan(planMealsModelArrayList)).start();
+    }
+
 }

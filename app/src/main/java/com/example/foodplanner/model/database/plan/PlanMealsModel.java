@@ -4,78 +4,47 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.foodplanner.model.ModelClasses.MealsTypeModel;
-
-import java.util.ArrayList;
-
 @Entity
 public class PlanMealsModel {
 
     @PrimaryKey
-    @NonNull String userId;
-    private String idMeal;
+    @NonNull
+    String idMeal;
+    private String userId;
+    private String day;
     private String strMeal;
     private String strCategory;
     private String strArea;
     private String strInstructions;
     private String strMealThumb;
     private String strYoutube;
-  /*  private ArrayList<String> days;
-    private ArrayList<MealsTypeModel> mealsTypes;*/
 
-    public PlanMealsModel(@NonNull String userId, String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube) {
-        this.userId = userId;
+    public PlanMealsModel() {
+    }
+
+    public PlanMealsModel(@NonNull String idMeal, String userId, String day, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube) {
         this.idMeal = idMeal;
+        this.userId = userId;
+        this.day = day;
         this.strMeal = strMeal;
         this.strCategory = strCategory;
         this.strArea = strArea;
         this.strInstructions = strInstructions;
         this.strMealThumb = strMealThumb;
         this.strYoutube = strYoutube;
-
     }
-
-    public void setUserId(@NonNull String userId) {
-        this.userId = userId;
-    }
-
-    public void setIdMeal(String idMeal) {
-        this.idMeal = idMeal;
-    }
-
-    public void setStrMeal(String strMeal) {
-        this.strMeal = strMeal;
-    }
-
-    public void setStrCategory(String strCategory) {
-        this.strCategory = strCategory;
-    }
-
-    public void setStrArea(String strArea) {
-        this.strArea = strArea;
-    }
-
-    public void setStrInstructions(String strInstructions) {
-        this.strInstructions = strInstructions;
-    }
-
-    public void setStrMealThumb(String strMealThumb) {
-        this.strMealThumb = strMealThumb;
-    }
-
-    public void setStrYoutube(String strYoutube) {
-        this.strYoutube = strYoutube;
-    }
-
-
 
     @NonNull
+    public String getIdMeal() {
+        return idMeal;
+    }
+
     public String getUserId() {
         return userId;
     }
 
-    public String getIdMeal() {
-        return idMeal;
+    public String getDay() {
+        return day;
     }
 
     public String getStrMeal() {
@@ -102,7 +71,39 @@ public class PlanMealsModel {
         return strYoutube;
     }
 
+    public void setIdMeal(@NonNull String idMeal) {
+        this.idMeal = idMeal;
+    }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
+    public void setDay(String day) {
+        this.day = day;
+    }
 
+    public void setStrMeal(String strMeal) {
+        this.strMeal = strMeal;
+    }
+
+    public void setStrCategory(String strCategory) {
+        this.strCategory = strCategory;
+    }
+
+    public void setStrArea(String strArea) {
+        this.strArea = strArea;
+    }
+
+    public void setStrInstructions(String strInstructions) {
+        this.strInstructions = strInstructions;
+    }
+
+    public void setStrMealThumb(String strMealThumb) {
+        this.strMealThumb = strMealThumb;
+    }
+
+    public void setStrYoutube(String strYoutube) {
+        this.strYoutube = strYoutube;
+    }
 }

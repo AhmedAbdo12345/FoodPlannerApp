@@ -6,6 +6,7 @@ import com.example.foodplanner.model.database.plan.PlanMealsModel;
 import com.example.foodplanner.presenter.interfaces.PlanInterface;
 import com.example.foodplanner.presenter.repository.PlanRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Single;
@@ -45,5 +46,15 @@ PlanRepository planRepository;
     public void deletePlan(PlanMealsModel model) {
         planRepository.deletePlan(model);
 
+    }
+
+    @Override
+    public void deletePlanTable() {
+        planRepository.deleteTablePlan();
+    }
+
+    @Override
+    public void insertAllPlan(ArrayList<PlanMealsModel> planMealsModelArrayList) {
+        planRepository.insertAllPlanInRoom(planMealsModelArrayList);
     }
 }
