@@ -94,7 +94,6 @@ PlanMealsAdapter planMealsAdapter;
                    dayAdapter = new DayAdapter(UniqListOfDays,planMealsModels, getContext(),PlanFragment.this);
                    recyclerViewPlanMeals.setAdapter(dayAdapter);
 
-
             }
 
             @Override
@@ -107,28 +106,35 @@ PlanMealsAdapter planMealsAdapter;
 
     @Override
     public void onClick(int position, PlanMealsModel planMealsModel) {
+
         planPresenter.deletePlan(planMealsModel);
-        deletePlanMealFromFireStore(planMealsModel);
+        deletePlanMealFromFireStore(position,planMealsModel);
+       // dayAdapter.notifyItemRemoved(position);
+
     }
-    public void deletePlanMealFromFireStore(PlanMealsModel planMealsModel) {
+    public void deletePlanMealFromFireStore(int position, PlanMealsModel planMealsModel) {
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = firestore.collection("Plan")
-                .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection(planMealsModel.getIdMeal()).document(planMealsModel.getDay());
+        DocumentReference documentReference = firestore.collection("PlanMeals")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection("meals").document(planMealsModel.getIdMeal());
 
 
         documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    getFragmentManager().beginTransaction().detach(PlanFragment.this).attach(PlanFragment.this).commit();
 
-                    Toast.makeText(requireContext(), "Meal is deleted Successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Meal is deleted Successful", Toast.LENGTH_SHORT).show();
+
 
                 } else {
-                    Toast.makeText(requireContext(), task.getException().getMessage().toString(), Toast.LENGTH_SHORT).show();
+
+                    Log.i("PlanFragment", "onComplete: "+task.getException().getMessage().toString());
 
                 }
 
             }
         });
-    }}
+    }
+}

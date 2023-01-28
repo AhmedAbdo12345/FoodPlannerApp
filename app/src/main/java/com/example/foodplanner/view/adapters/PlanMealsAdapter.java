@@ -50,7 +50,6 @@ public class PlanMealsAdapter extends RecyclerView.Adapter<PlanMealsAdapter.Plan
                 Picasso.get().load(planMealsModelList.get(position).getStrMealThumb()).into(holder.imgMeal);
             }
             holder.textViewTitle.setText(planMealsModelList.get(position).getStrMeal());
-            holder.textViewCategory.setText(planMealsModelList.get(position).getStrCategory());
 
     }
 
@@ -66,13 +65,12 @@ public class PlanMealsAdapter extends RecyclerView.Adapter<PlanMealsAdapter.Plan
 
     public class PlanViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imgMeal,imgDelte;
-        TextView textViewTitle, textViewCategory;
+        TextView textViewTitle;
 
         public PlanViewHolder(@NonNull View itemView) {
             super(itemView);
             imgMeal = itemView.findViewById(R.id.img_plan_meals);
             textViewTitle = itemView.findViewById(R.id.tv_plan_title_meals);
-            textViewCategory = itemView.findViewById(R.id.tv_plan_category_meal);
             imgDelte = itemView.findViewById(R.id.img_delete_plsn_meal);
             imgDelte.setOnClickListener(this);
 

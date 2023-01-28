@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,16 +26,16 @@
 
             <ImageView
                 android:id="@+id/img_plan_meals"
-                android:layout_width="151dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
+                android:scaleType="centerInside"
                 android:layout_weight="3"
                 android:src="@drawable/pizza" />
 
             <LinearLayout
-                android:layout_weight="6"
+                android:layout_weight="5"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" >
 
@@ -46,23 +46,14 @@
                     android:text="Fresh Corn Omelet"
                     android:textColor="#FF018786"
                     android:textStyle="bold"
-                    android:textSize="20sp"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_plan_category_meal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="This meal contains of eggs nad tomatao , fkkfjkjkjfkjfklfklkflklkflkf"
-                    />
-
+                    android:textSize="20sp" />
 
             </LinearLayout>
             <ImageView
                 android:id="@+id/img_delete_plsn_meal"
                 android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:gravity="right"
+                android:layout_height="50dp"
+                android:layout_gravity="top|right"
                 android:src="@drawable/close" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

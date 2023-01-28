@@ -3,6 +3,7 @@ package com.example.foodplanner.presenter.classes;
 import android.content.Context;
 import android.util.Patterns;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -36,15 +37,24 @@ public class LogInFragmentPresenter {
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
-                                ConstantsClass.setEMAIL(email);
-                                //  GetPlanMealsFromFireStore.getAllPlan(context);
-                               GetPlanMealsFromFireStore.getPlanFromFireStore(context);
-                                logInFragmentInterface.loginSucess(authResult);
+                                if (firebaseAuth.getCurrentUser().isEmailVerified()) {
+                                    ConstantsClass.setEMAIL(email);
+                                    //  GetPlanMealsFromFireStore.getAllPlan(context);
+                                    GetPlanMealsFromFireStore.getPlanFromFireStore(context);
+                                    logInFragmentInterface.loginSucess(authResult);
+                                }else {
+                                    firebaseAuth.getCurrentUser().sendEmailVerification();
+                                    String message="Check Email to Verification before login";
+                                    //Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                    logInFragmentInterface.loginFaliure(message);
+                                    firebaseAuth.signOut();
+
+                                }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                logInFragmentInterface.loginFaliure(e);
+                                logInFragmentInterface.loginFaliure("Your  Email or Password is InValid");
                             }
                         });
             } else {

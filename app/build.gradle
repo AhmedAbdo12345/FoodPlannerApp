@@ -92,6 +92,9 @@ dependencies {
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
     //---------------------------------------------------
 
+    //------------------Progress Dialog ------------------------
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
+    //---------------------------------------------------
 
 
 }

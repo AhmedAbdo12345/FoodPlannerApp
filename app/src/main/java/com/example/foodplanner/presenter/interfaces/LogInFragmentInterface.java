@@ -6,6 +6,6 @@ import com.google.firebase.auth.AuthResult;
 
 public interface LogInFragmentInterface {
     void loginSucess(AuthResult authResult);
-    void loginFaliure(@NonNull Exception e);
+    void loginFaliure(String  message);
 
 }
