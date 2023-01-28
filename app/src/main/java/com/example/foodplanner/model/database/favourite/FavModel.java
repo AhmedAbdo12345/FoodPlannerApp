@@ -26,7 +26,6 @@ public class FavModel {
     public FavModel(@NonNull String idMeal, String userId,  String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube) {
         this.idMeal = idMeal;
         this.userId = userId;
-
         this.strMeal = strMeal;
         this.strCategory = strCategory;
         this.strArea = strArea;

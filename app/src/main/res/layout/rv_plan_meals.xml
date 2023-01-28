@@ -48,6 +48,14 @@
                     android:textStyle="bold"
                     android:textSize="20sp" />
 
+
+                <TextView
+                    android:id="@+id/tv_plan_category_meal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This meal contains of eggs nad tomatao , fkkfjkjkjfkjfklfklkflklkflkf"
+                    />
+
             </LinearLayout>
             <ImageView
                 android:id="@+id/img_delete_plsn_meal"
