@@ -94,4 +94,82 @@ SearchInterface searchInterface;
         single.subscribe(singleObserver);
 
     }
+
+    public void searchByName(String name){
+        SingleObserver<MealsModelResponse> singleObserver=new SingleObserver<MealsModelResponse>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull MealsModelResponse mealsModelResponse) {
+                searchInterface.getSuccessNameBySearch(mealsModelResponse);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        };
+
+        Single<MealsModelResponse> single = MealsApiClient.getINSTANE().getSearchMealsByName(name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        single.subscribe(singleObserver);
+
+    }
+
+
+    public void searchByID(String id){
+        SingleObserver<MealsModelResponse> singleObserver=new SingleObserver<MealsModelResponse>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull MealsModelResponse mealsModelResponse) {
+                searchInterface.getSuccessIdBySearch(mealsModelResponse);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        };
+
+        Single<MealsModelResponse> single = MealsApiClient.getINSTANE().getSearchMealsByID(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        single.subscribe(singleObserver);
+
+    }
+
+
+    public void searchByFirstLetter(String firstLetter){
+        SingleObserver<MealsModelResponse> singleObserver=new SingleObserver<MealsModelResponse>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull MealsModelResponse mealsModelResponse) {
+                searchInterface.getSuccessFirstLetterBySearch(mealsModelResponse);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        };
+
+        Single<MealsModelResponse> single = MealsApiClient.getINSTANE().getSearchMealsByFirstLetter(firstLetter)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        single.subscribe(singleObserver);
+
+    }
+
 }

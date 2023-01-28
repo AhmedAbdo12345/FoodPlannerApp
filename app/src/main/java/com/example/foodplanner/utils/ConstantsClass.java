@@ -6,6 +6,9 @@ public class ConstantsClass {
     public static final String CATEGORY="Category";
     public static final String Area="Area";
     public static final String Ingredients="Ingredients";
+    public static final String Name="Name";
+    public static final String Id="Id";
+    public static final String FirstLetter="FirstLetter";
 
     public static  String USERNAME;
     public static  String EMAIL;

@@ -1,26 +1,31 @@
 package com.example.foodplanner.model.database.favourite;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
-
+@Dao
 public interface FavDao {
-    @Query("select * from favmodel")
-    Single<List<FavModel>> getFavs();
+    @Query("SELECT * FROM FavModel")
+    Single<List<FavModel>> getAllFav();
 
-    @Query("select * from favmodel where favName LIKE :name")
-    Single<FavModel> getFav(String name);
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    Completable insertMeal (FavModel favModel);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public Completable insertFavData(FavModel model);
 
     @Delete
-    Completable deleteMeal(FavModel favModel);
+    public Completable deleteFavMeal(FavModel model);
+
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAlFav(ArrayList<FavModel> favModelArrayList);
 
 }

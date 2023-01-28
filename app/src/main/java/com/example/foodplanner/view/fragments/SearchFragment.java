@@ -67,6 +67,19 @@ SearchAdapter searchAdapter;
                 if(searchBy.equals(ConstantsClass.Ingredients)){
                     searchPresenter.searchByIngredients(s.toString());
                 }
+
+                if(searchBy.equals(ConstantsClass.Name)){
+                    searchPresenter.searchByName(s.toString());
+                }
+
+                if(searchBy.equals(ConstantsClass.Id)){
+                    searchPresenter.searchByID(s.toString());
+                }
+
+                if(searchBy.equals(ConstantsClass.FirstLetter)){
+                    searchPresenter.searchByFirstLetter(s.toString());
+                }
+
             }
 
             @Override
@@ -96,6 +109,24 @@ SearchAdapter searchAdapter;
 
     @Override
     public void getSuccessIngredientsBySearch(MealsModelResponse mealsModelResponse) {
+        searchAdapter = new SearchAdapter(mealsModelResponse,getContext());
+        recyclerView_search_category.setAdapter(searchAdapter);
+    }
+
+    @Override
+    public void getSuccessNameBySearch(MealsModelResponse mealsModelResponse) {
+        searchAdapter = new SearchAdapter(mealsModelResponse,getContext());
+        recyclerView_search_category.setAdapter(searchAdapter);
+    }
+
+    @Override
+    public void getSuccessIdBySearch(MealsModelResponse mealsModelResponse) {
+        searchAdapter = new SearchAdapter(mealsModelResponse,getContext());
+        recyclerView_search_category.setAdapter(searchAdapter);
+    }
+
+    @Override
+    public void getSuccessFirstLetterBySearch(MealsModelResponse mealsModelResponse) {
         searchAdapter = new SearchAdapter(mealsModelResponse,getContext());
         recyclerView_search_category.setAdapter(searchAdapter);
     }

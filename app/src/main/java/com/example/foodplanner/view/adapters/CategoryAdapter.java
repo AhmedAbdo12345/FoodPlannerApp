@@ -46,6 +46,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MealsV
 
     @NonNull
     @Override
+
     public MealsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new MealsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_categories, parent, false));
 
@@ -68,7 +69,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MealsV
     public class MealsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imageView;
         TextView textView;
-CardView cardView;
+          CardView cardView;
+
         public MealsViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView=itemView.findViewById(R.id.categoryCard);

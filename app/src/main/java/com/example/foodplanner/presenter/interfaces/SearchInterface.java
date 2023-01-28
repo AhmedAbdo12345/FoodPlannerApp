@@ -8,4 +8,10 @@ public interface SearchInterface {
     public void getSuccessAreaBySearch(MealsModelResponse mealsModelResponse) ;
 
     public void getSuccessIngredientsBySearch(MealsModelResponse mealsModelResponse) ;
+
+    public void getSuccessNameBySearch(MealsModelResponse mealsModelResponse) ;
+
+    public void getSuccessIdBySearch(MealsModelResponse mealsModelResponse) ;
+
+    public void getSuccessFirstLetterBySearch(MealsModelResponse mealsModelResponse) ;
 }
