@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,9 @@ import android.widget.Toast;
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelClasses.MealsModel;
 
+import com.example.foodplanner.model.database.favourite.FavModel;
+import com.example.foodplanner.presenter.classes.FavPresenter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -33,7 +37,8 @@ public class DetailsFragment extends Fragment {
     YouTubePlayerView youTubePlayerView;
     Button buttonAddPlan;
     MealsModel model;
-
+ImageButton imageButtonFav;
+FavPresenter favPresenter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +55,7 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        imageButtonFav=view.findViewById(R.id.imgButtonFav);
         imgMeal = view.findViewById(R.id.img_meal_details);
         tvTitleMeal = view.findViewById(R.id.tv_title_details);
         tvCategoryMeal = view.findViewById(R.id.tv_meal_category_details);
@@ -90,6 +95,15 @@ public class DetailsFragment extends Fragment {
                     DetailsFragmentDirections.ActionDetailsFragmentToChoicePlanFragment action = DetailsFragmentDirections.actionDetailsFragmentToChoicePlanFragment(model);
                     Navigation.findNavController(getView()).navigate(action);
                 }
+            }
+        });
+        favPresenter=new FavPresenter(getContext());
+        FavModel favModel=new FavModel(model.getIdMeal(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),
+                model.getStrMeal(),model.getStrCategory(),model.getStrArea(), model.getStrInstructions(), model.getStrMeal(), model.getStrYoutube());
+        imageButtonFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favPresenter.insertFav(favModel);
             }
         });
     }

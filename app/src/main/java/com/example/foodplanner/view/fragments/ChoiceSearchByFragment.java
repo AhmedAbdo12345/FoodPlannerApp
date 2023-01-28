@@ -17,7 +17,7 @@ import com.example.foodplanner.utils.ConstantsClass;
 
 
 public class ChoiceSearchByFragment extends Fragment {
-Button buttonCategory,buttonArea,buttonIngrediant;
+Button buttonCategory,buttonArea,buttonIngrediant, buttonName, buttonId, buttonFirst;
 
 
     @Override
@@ -39,6 +39,10 @@ Button buttonCategory,buttonArea,buttonIngrediant;
         buttonArea=view.findViewById(R.id.btn_search_by_area);
         buttonCategory=view.findViewById(R.id.btn_search_by_category);
         buttonIngrediant=view.findViewById(R.id.btn_search_by_ingredient);
+        buttonName = view.findViewById(R.id.btn_search_by_name);
+        buttonId = view.findViewById(R.id.btn_search_by_id);
+        buttonFirst = view.findViewById(R.id.btn_search_by_first);
+
 
         buttonCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +67,33 @@ Button buttonCategory,buttonArea,buttonIngrediant;
             public void onClick(View v) {
                 ChoiceSearchByFragmentDirections.ActionChoiceSearchByFragmentToSearchFragment action=
                         ChoiceSearchByFragmentDirections.actionChoiceSearchByFragmentToSearchFragment(ConstantsClass.Ingredients);
+                Navigation.findNavController(getView()).navigate(action);
+            }
+        });
+
+        buttonName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChoiceSearchByFragmentDirections.ActionChoiceSearchByFragmentToSearchFragment action=
+                        ChoiceSearchByFragmentDirections.actionChoiceSearchByFragmentToSearchFragment(ConstantsClass.Name);
+                Navigation.findNavController(getView()).navigate(action);
+            }
+        });
+
+        buttonId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChoiceSearchByFragmentDirections.ActionChoiceSearchByFragmentToSearchFragment action=
+                        ChoiceSearchByFragmentDirections.actionChoiceSearchByFragmentToSearchFragment(ConstantsClass.Id);
+                Navigation.findNavController(getView()).navigate(action);
+            }
+        });
+
+        buttonFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChoiceSearchByFragmentDirections.ActionChoiceSearchByFragmentToSearchFragment action=
+                        ChoiceSearchByFragmentDirections.actionChoiceSearchByFragmentToSearchFragment(ConstantsClass.FirstLetter);
                 Navigation.findNavController(getView()).navigate(action);
             }
         });
