@@ -56,7 +56,6 @@
                     android:text="This meal contains of eggs nad tomatao , fkkfjkjkjfkjfklfklkflklkflkf"
                     />
 
-
             </LinearLayout>
             <ImageView
                 android:id="@+id/img_delete_plsn_meal"
