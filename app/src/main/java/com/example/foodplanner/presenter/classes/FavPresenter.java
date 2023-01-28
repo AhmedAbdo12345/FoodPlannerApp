@@ -13,7 +13,9 @@ import java.util.List;
 import io.reactivex.rxjava3.core.Single;
 
 public class FavPresenter implements FavInterface {
+
     FavRepository favRepository;
+
 public FavPresenter(Context context){
     favRepository=new FavRepository(context);
 }
@@ -25,17 +27,17 @@ public FavPresenter(Context context){
 
     @Override
     public void insertFav(FavModel model) {
-favRepository.insertFav(model);
+            favRepository.insertFav(model);
     }
 
     @Override
     public void deleteFav(FavModel model) {
-favRepository.deleteFav(model);
+      favRepository.deleteFav(model);
     }
 
     @Override
     public void insertAllFav(ArrayList<FavModel> favModelArrayList) {
-favRepository.insertAllFavInRoom(favModelArrayList);
+          favRepository.insertAllFavInRoom(favModelArrayList);
     }
 }
 

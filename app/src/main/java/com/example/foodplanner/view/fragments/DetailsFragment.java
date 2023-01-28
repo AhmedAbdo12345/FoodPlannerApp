@@ -99,7 +99,7 @@ FavPresenter favPresenter;
         });
         favPresenter=new FavPresenter(getContext());
         FavModel favModel=new FavModel(model.getIdMeal(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                model.getStrMeal(),model.getStrCategory(),model.getStrArea(), model.getStrInstructions(), model.getStrMeal(), model.getStrYoutube());
+                model.getStrMeal(),model.getStrCategory(),model.getStrArea(), model.getStrInstructions(), model.getStrMealThumb(), model.getStrYoutube());
         imageButtonFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

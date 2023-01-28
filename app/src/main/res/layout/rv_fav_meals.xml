@@ -26,7 +26,7 @@
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/imageMeal"
+                android:id="@+id/imageMealFav"
                 android:layout_width="151dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
@@ -35,6 +35,7 @@
             <LinearLayout
                 android:layout_weight="6"
                 android:orientation="vertical"
+                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" >
 
@@ -42,37 +43,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Fresh Corn Omelet"
+                    android:id="@+id/mealNameFav"
                     android:textColor="#FF018786"
                     android:textStyle="bold"
                     android:textSize="20sp"
                 />
 
                 <TextView
+                    android:id="@+id/mealCategoryFav"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="This meal contains of eggs nad tomatao , fkkfjkjkjfkjfklfklkflklkflkf"
                     />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RatingBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:rating="3.4"
-                        style="?android:attr/ratingBarStyleIndicator"
-                        android:progressTint="#FF018786"
-                        android:id="@+id/smallRating"
-                        />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/close" />
-                </LinearLayout>
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_deleteMealFav"
+                android:layout_width="50dp"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:src="@drawable/close" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
