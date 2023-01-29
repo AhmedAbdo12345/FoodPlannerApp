@@ -23,7 +23,8 @@ public interface FavDao {
     @Delete
     public Completable deleteFavMeal(FavModel model);
 
-
+    @Query("DELETE FROM FavModel")
+    public Completable deleteFavTable();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAlFav(ArrayList<FavModel> favModelArrayList);

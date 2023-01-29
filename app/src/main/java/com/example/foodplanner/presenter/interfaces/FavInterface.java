@@ -12,6 +12,7 @@ public interface FavInterface {
     public Single<List<FavModel>> getAllFavMeals();
     public void insertFav(FavModel model);
     public void deleteFav(FavModel model);
+    public void deleteFavTable();
 
     public void insertAllFav(ArrayList<FavModel> FavModelArrayList);
 }

@@ -24,8 +24,12 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelClasses.MealsModel;
 
 import com.example.foodplanner.model.database.favourite.FavModel;
+import com.example.foodplanner.model.database.plan.PlanMealsModel;
 import com.example.foodplanner.presenter.classes.FavPresenter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -105,9 +109,26 @@ FavPresenter favPresenter;
             @Override
             public void onClick(View view) {
                 favPresenter.insertFav(favModel);
+                addFavinFireStore(favModel);
             }
         });
     }
 
-
+    private void addFavinFireStore(FavModel favModel) {
+        FirebaseFirestore.getInstance().collection("Fav").document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection("meals")
+                .document(favModel.getIdMeal())
+                .set(favModel)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("DetailsFragment", "onFailure: "+e.toString());
+                    }
+                });
+    }
 }
