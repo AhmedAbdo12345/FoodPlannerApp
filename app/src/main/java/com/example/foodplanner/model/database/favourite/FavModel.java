@@ -6,8 +6,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.foodplanner.model.ModelClasses.MealsModel;
+
 @Entity
-public class FavModel {
+public class FavModel extends MealsModel {
 
     @PrimaryKey
     @NonNull

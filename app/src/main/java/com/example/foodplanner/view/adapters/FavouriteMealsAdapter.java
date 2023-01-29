@@ -1,4 +1,5 @@
 package com.example.foodplanner.view.adapters;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,10 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.database.favourite.FavModel;
+import com.example.foodplanner.view.fragments.FavouriteFragmentDirections;
+import com.example.foodplanner.view.fragments.PlanFragmentDirections;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
@@ -42,14 +47,20 @@ import java.util.List;
         }
 
         @Override
-        public void onBindViewHolder(@NonNull com.example.foodplanner.view.adapters.FavouriteMealsAdapter.FavouriteViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull com.example.foodplanner.view.adapters.FavouriteMealsAdapter.FavouriteViewHolder holder,@SuppressLint("RecyclerView")   int position) {
 
             if (favMealsModelList.get(position).getStrMealThumb() != null) {
                 Picasso.get().load(favMealsModelList.get(position).getStrMealThumb()).into(holder.imgMeal);
             }
             holder.textViewTitle.setText(favMealsModelList.get(position).getStrMeal());
-            holder.textViewCategory.setText(favMealsModelList.get(position).getStrCategory());
-
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FavouriteFragmentDirections.ActionFavNavToDetailsFragment action =
+                            FavouriteFragmentDirections.actionFavNavToDetailsFragment(favMealsModelList.get(position));
+                    Navigation.findNavController(v).navigate(action);
+                }
+            });
         }
 
         @Override
@@ -64,13 +75,14 @@ import java.util.List;
 
         public class FavouriteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
             ImageView imgMeal,imgDelte;
-            TextView textViewTitle, textViewCategory;
+            CardView cardView;
+            TextView textViewTitle;
 
             public FavouriteViewHolder (@NonNull View itemView) {
                 super(itemView);
+                cardView=itemView.findViewById(R.id.favCard);
                 imgMeal = itemView.findViewById(R.id.imageMealFav);
                 textViewTitle = itemView.findViewById(R.id.mealNameFav);
-                textViewCategory = itemView.findViewById(R.id.mealCategoryFav);
                 imgDelte = itemView.findViewById(R.id.img_deleteMealFav);
                 imgDelte.setOnClickListener(this);
 

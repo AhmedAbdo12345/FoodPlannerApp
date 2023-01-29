@@ -36,12 +36,12 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeNav, R.id.favNav, R.id.profileNav, R.id.plansNav)
+                R.id.homeNav, R.id.favNav, R.id.plansNav)
                 .build();
 
         fav = findViewById(R.id.favNav);
         plan = findViewById(R.id.plansNav);
-        profile=findViewById(R.id.profileNav);
+       // profile=findViewById(R.id.profileNav);
         String user = UserSharedPreference.getInstance(this).getDataFromSharedPreference("user");
         if (user.equals("Guest") || (!NetworkConnection.isNetworkAvailable(this))) {
             fav.setVisibility(View.GONE);
@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             fav.setVisibility(View.VISIBLE);
             plan.setVisibility(View.VISIBLE);
-            profile.setVisibility(View.VISIBLE);
+          //  profile.setVisibility(View.GONE);
 
         }
         navController = Navigation.findNavController(this, R.id.fragmentContainerView);

@@ -69,7 +69,7 @@ public class PlanMealsAdapter extends RecyclerView.Adapter<PlanMealsAdapter.Plan
                 Picasso.get().load(planMealsModelList.get(position).getStrMealThumb()).into(holder.imgMeal);
             }
             holder.textViewTitle.setText(planMealsModelList.get(position).getStrMeal());
-        holder.imgMeal.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PlanFragmentDirections.ActionPlansNavToDetailsFragment action =
