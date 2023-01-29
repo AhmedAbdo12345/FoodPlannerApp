@@ -130,7 +130,7 @@ public class DetailsFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     favPresenter.insertFav(favModel);
-                    // addFavinFireStore(favModel);
+                     addFavinFireStore(favModel);
                 }
             });
 
