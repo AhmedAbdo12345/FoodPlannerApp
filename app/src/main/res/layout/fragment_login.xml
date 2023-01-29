@@ -97,6 +97,7 @@
             android:background="@drawable/button_background"
             android:text="@string/sign_in"
             android:textColor="@color/white"
+            android:textAllCaps="false"
             android:textSize="18sp" />
 <LinearLayout
     android:layout_width="match_parent"
@@ -148,8 +149,20 @@
             android:drawableStart="@drawable/common_google_signin_btn_icon_dark_normal"
             android:text="@string/connect_with_google"
             android:textColor="@color/white"
+            android:textAllCaps="false"
             android:textSize="16sp"
             tools:ignore="TextContrastCheck" />
+
+        <Button
+            android:id="@+id/btn_Guest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button_background"
+            android:text="Guest"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

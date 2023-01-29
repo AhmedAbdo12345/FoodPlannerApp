@@ -31,7 +31,7 @@ public interface MealsApiInterface {
     public Single<MealsModelResponse> getSearchMealsByFirstLetter(@Query("f") String first);
 
 
-    @GET("search.php")
+    @GET("lookup.php")
     public Single<MealsModelResponse> getSearchMealsByID(@Query("i") String id);
 
 

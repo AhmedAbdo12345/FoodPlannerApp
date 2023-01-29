@@ -3,6 +3,8 @@ package com.example.foodplanner.presenter.repository;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.foodplanner.model.database.plan.DaoMeals;
 import com.example.foodplanner.model.database.plan.DatabaseMeals;
 import com.example.foodplanner.model.database.plan.PlanMealsModel;
@@ -92,4 +94,11 @@ public class PlanRepository {
                 daoMeals.insertAllPlan(planMealsModelArrayList)).start();
     }
 
+
+    public synchronized LiveData<List<PlanMealsModel>> getListOfDaysForWeek(String day){
+        LiveData<List<PlanMealsModel>> list=daoMeals.getDataForDay(day);
+
+        return list;
+
+    }
 }

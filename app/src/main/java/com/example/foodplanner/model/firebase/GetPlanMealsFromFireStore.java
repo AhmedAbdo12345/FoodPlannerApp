@@ -8,7 +8,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.example.foodplanner.model.database.favourite.FavModel;
 import com.example.foodplanner.model.database.plan.PlanMealsModel;
+import com.example.foodplanner.presenter.classes.FavPresenter;
 import com.example.foodplanner.presenter.classes.PlanPresenter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,6 +45,34 @@ public class GetPlanMealsFromFireStore {
                             //-----------------This line To inser All Plan in Room ---------------------
                             PlanPresenter planPresenter = new PlanPresenter(context);
                             planPresenter.insertAllPlan(listOfStrings);
+                            //----------------------------------------------------------------------
+
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("LogInFragmentPresenter", "onFailure: "+e.toString());
+
+                    }
+                });
+    }
+    public static void getFavFromFireStore(Context context) {
+        FirebaseFirestore.getInstance().collection("Fav").document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection("meals").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onSuccess(QuerySnapshot documentSnapshots) {
+                        if (documentSnapshots.isEmpty()) {
+                            Log.d("LogInFragmentPresenter", "onSuccess:  EMPTY");
+                            return;
+                        } else {
+                            List<FavModel> types = documentSnapshots.toObjects(FavModel.class);
+                            ArrayList<FavModel> listOfStrings = new ArrayList<>(types.size());
+                            listOfStrings.addAll(types);
+                            //-----------------This line To inser All Plan in Room ---------------------
+                            FavPresenter favPresenter = new FavPresenter(context);
+                            favPresenter.insertAllFav(listOfStrings);
                             //----------------------------------------------------------------------
 
                         }

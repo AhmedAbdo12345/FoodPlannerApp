@@ -2,6 +2,8 @@ package com.example.foodplanner.presenter.classes;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.foodplanner.model.database.plan.PlanMealsModel;
 import com.example.foodplanner.presenter.interfaces.PlanInterface;
 import com.example.foodplanner.presenter.repository.PlanRepository;
@@ -57,4 +59,9 @@ PlanRepository planRepository;
     public void insertAllPlan(ArrayList<PlanMealsModel> planMealsModelArrayList) {
         planRepository.insertAllPlanInRoom(planMealsModelArrayList);
     }
+
+    public synchronized LiveData<List<PlanMealsModel>> getListPlanItem(String day) {
+        return planRepository.getListOfDaysForWeek(day);
+    }
+
 }

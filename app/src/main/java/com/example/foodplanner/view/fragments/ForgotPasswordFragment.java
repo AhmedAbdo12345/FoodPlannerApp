@@ -45,7 +45,8 @@ public class ForgotPasswordFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getContext(), "Check your Gmail ", Toast.LENGTH_SHORT).show();
+                                    edtEmailForgetPassword.setText("");
+                                    Toast.makeText(getContext(), "Check your Email ", Toast.LENGTH_SHORT).show();
                                 }}
                             });
 

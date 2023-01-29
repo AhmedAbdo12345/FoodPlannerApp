@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.OnClick;
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
 import com.example.foodplanner.model.ModelResponse.MealsModelResponse;

@@ -15,8 +15,6 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MealsViewHolder> {
     private MealsModelResponse modelResponse;
     Context context;
@@ -28,15 +26,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MealsViewH
         this.mOnClickListener = mOnClickListener;
 
     }
-    public SearchAdapter(MealsModelResponse mealsModelResponses, Context applicationContext) {
+  /*  public SearchAdapter(MealsModelResponse mealsModelResponses, Context applicationContext) {
         this.modelResponse = mealsModelResponses;
         this.context = applicationContext;
 
-    }
+    }*/
 
     public interface ListItemClickListener {
 
-        void onClickMeals(int position,List<MealsModelResponse> mealsModelResponses);
+        void onClickMealsInSearch(int position, String idMeal);
     }
 
     @NonNull
@@ -80,7 +78,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MealsViewH
 
         @Override
         public void onClick(View view) {
-         //   mOnClickListener.onClickMeals( getAdapterPosition(),modelResponse);
+           mOnClickListener.onClickMealsInSearch( getAdapterPosition(),modelResponse.getMeals().get(getAdapterPosition()).getIdMeal());
 
         }
 

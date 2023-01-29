@@ -149,7 +149,7 @@ boolean check = true;
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                searchInterface.getFailedIdBySearch(e.getMessage().toString());
             }
         };
 

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.foodplanner.view.activities.AuthActivity;
 import com.example.foodplanner.view.activities.HomeActivity;
@@ -30,10 +31,11 @@ public class DeciderActivity extends AppCompatActivity {
         // Log.d("seen",String.valueOf(seen));
         if (seen){
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-            if (currentUser != null) {
+            if (currentUser != null && currentUser.isEmailVerified()) {
                 //user signed in
                     startActivity(new Intent(this, HomeActivity.class));
                     this.finish();
+
 
             }else {
                 intent =new Intent(this, AuthActivity.class);

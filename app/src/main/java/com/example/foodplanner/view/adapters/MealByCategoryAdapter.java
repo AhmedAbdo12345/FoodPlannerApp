@@ -13,8 +13,7 @@ import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
 import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
 import com.squareup.picasso.Picasso;
 import java.util.List;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 
 public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAdapter.RecyclerViewHolder> {
     private CategoryModelResponse categoryModelResponses;
@@ -53,13 +52,12 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
     }
 
     static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.mealThumbCat)
         ImageView mealThumb;
-        @BindView(R.id.mealNameCat)
         TextView mealName;
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            mealThumb=itemView.findViewById(R.id.mealThumbCat);
+            mealName=itemView.findViewById(R.id.mealNameCat);
             itemView.setOnClickListener(this);
         }
 

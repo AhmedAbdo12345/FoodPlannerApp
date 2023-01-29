@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,10 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.foodplanner.R;
+import com.example.foodplanner.model.ModelClasses.DisplayPlanModel;
 import com.example.foodplanner.model.database.plan.PlanMealsModel;
 import com.example.foodplanner.presenter.classes.PlanPresenter;
 import com.example.foodplanner.view.adapters.DayAdapter;
-import com.example.foodplanner.view.adapters.MealsAdapter;
 import com.example.foodplanner.view.adapters.PlanMealsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,18 +28,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
-public class PlanFragment extends Fragment implements PlanMealsAdapter.ListItemClickListener{
+public class PlanFragment extends Fragment implements  PlanMealsAdapter.AdapterConnector {
 RecyclerView recyclerViewPlanMeals;
-PlanMealsAdapter planMealsAdapter;
     DayAdapter dayAdapter;
     PlanPresenter planPresenter;
     @Override
@@ -68,9 +61,12 @@ PlanMealsAdapter planMealsAdapter;
         gridLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerViewPlanMeals.setLayoutManager(gridLayoutManager);
 
+        dayAdapter = new DayAdapter(ParentItemList(), requireContext(),this);
+
+        recyclerViewPlanMeals.setAdapter(dayAdapter);
 
 
-        planPresenter.getAllPlanMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<List<PlanMealsModel>>() {
+       /* planPresenter.getAllPlanMeals().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<List<PlanMealsModel>>() {
             @Override
             public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
 
@@ -85,15 +81,16 @@ PlanMealsAdapter planMealsAdapter;
                       planMealsModels.remove(planMealsModels.get(i));
                     //  setOfDays.add(listCurrentUser.get(i).getDay());
 
-                  }*/
+                  }
                    setOfDays.add(planMealsModels.get(i).getDay());
                }
                    ArrayList<String> UniqListOfDays = new ArrayList(setOfDays);
 
                //    planMealsAdapter = new PlanMealsAdapter(planMealsModels, getContext(),UniqListOfDays);
-                   dayAdapter = new DayAdapter(UniqListOfDays,planMealsModels, getContext(),PlanFragment.this);
-                   recyclerViewPlanMeals.setAdapter(dayAdapter);
+               //    dayAdapter = new DayAdapter(UniqListOfDays,planMealsModels, getContext(),PlanFragment.this);
+                dayAdapter = new DayAdapter(ParentItemList(), getContext(),PlanFragment.this);
 
+                recyclerViewPlanMeals.setAdapter(dayAdapter);
 
             }
 
@@ -101,34 +98,102 @@ PlanMealsAdapter planMealsAdapter;
             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
 
             }
-        });
+        });*/
 
     }
 
-    @Override
-    public void onClick(int position, PlanMealsModel planMealsModel) {
-        planPresenter.deletePlan(planMealsModel);
-        deletePlanMealFromFireStore(planMealsModel);
-    }
-    public void deletePlanMealFromFireStore(PlanMealsModel planMealsModel) {
+
+    public void deletePlanMealFromFireStore(int position, PlanMealsModel planMealsModel) {
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = firestore.collection("Plan")
-                .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection(planMealsModel.getIdMeal()).document(planMealsModel.getDay());
+        DocumentReference documentReference = firestore.collection("PlanMeals")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection("meals").document(planMealsModel.getIdMeal());
 
 
         documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    getFragmentManager().beginTransaction().detach(PlanFragment.this).attach(PlanFragment.this).commit();
 
-                    Toast.makeText(requireContext(), "Meal is deleted Successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Meal is deleted Successful", Toast.LENGTH_SHORT).show();
+
 
                 } else {
-                    Toast.makeText(requireContext(), task.getException().getMessage().toString(), Toast.LENGTH_SHORT).show();
+
+                    Log.i("PlanFragment", "onComplete: "+task.getException().getMessage().toString());
 
                 }
 
             }
         });
-    }}
+    }
+    List<DisplayPlanModel> itemList = new ArrayList<>();
+
+    private List<DisplayPlanModel> ParentItemList() {
+
+        planPresenter.getListPlanItem("SaturDay").observe(getViewLifecycleOwner(), new Observer<List<PlanMealsModel>>() {
+            @Override
+            public void onChanged(List<PlanMealsModel> planMealsModels) {
+                DisplayPlanModel item = new DisplayPlanModel("SaturDay", planMealsModels);
+                itemList.add(item);
+            }
+        });
+        planPresenter.getListPlanItem("SunDay").observe(getViewLifecycleOwner(), new Observer<List<PlanMealsModel>>() {
+            @Override
+            public void onChanged(List<PlanMealsModel> planMealsModels) {
+                DisplayPlanModel item = new DisplayPlanModel("Sunday", planMealsModels);
+                itemList.add(item);
+            }
+        });
+        planPresenter.getListPlanItem("MonDay").observe(getViewLifecycleOwner(), new Observer<List<PlanMealsModel>>() {
+            @Override
+            public void onChanged(List<PlanMealsModel> planMealsModels) {
+                DisplayPlanModel item = new DisplayPlanModel("MonDay", planMealsModels);
+                itemList.add(item);
+            }
+        });
+        planPresenter.getListPlanItem("TuesDay").observe(getViewLifecycleOwner(), new Observer<List<PlanMealsModel>>() {
+            @Override
+            public void onChanged(List<PlanMealsModel> planMealsModels) {
+                DisplayPlanModel item = new DisplayPlanModel("TuesDay", planMealsModels);
+                itemList.add(item);
+            }
+        });
+        planPresenter.getListPlanItem("WednesDay").observe(getViewLifecycleOwner(), new Observer<List<PlanMealsModel>>() {
+            @Override
+            public void onChanged(List<PlanMealsModel> planMealsModels) {
+                DisplayPlanModel item = new DisplayPlanModel("WednesDay", planMealsModels);
+                itemList.add(item);
+            }
+        });
+        planPresenter.getListPlanItem("ThursDay").observe(getViewLifecycleOwner(), new Observer<List<PlanMealsModel>>() {
+            @Override
+            public void onChanged(List<PlanMealsModel> planMealsModels) {
+                DisplayPlanModel item = new DisplayPlanModel("ThursDay", planMealsModels);
+                itemList.add(item);
+            }
+        });
+        planPresenter.getListPlanItem("FriDay").observe(getViewLifecycleOwner(), new Observer<List<PlanMealsModel>>() {
+            @Override
+            public void onChanged(List<PlanMealsModel> planMealsModels) {
+                DisplayPlanModel item = new DisplayPlanModel("FriDay", planMealsModels);
+                itemList.add(item);
+                dayAdapter.setItemList(itemList);
+            }
+        });
+
+        return itemList;
+    }
+
+    @Override
+    public void sendData(PlanMealsModel meal) {
+
+    }
+
+    @Override
+    public void callRepo(PlanMealsModel meal, int position) {
+        planPresenter.deletePlan(meal);
+        deletePlanMealFromFireStore(position,meal);
+    }
+}

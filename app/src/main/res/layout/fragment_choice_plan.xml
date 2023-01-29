@@ -14,9 +14,10 @@ tools:context=".view.fragments.ChoicePlanFragment">
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/button_background"
-        android:text="Add Plan"
+        android:text="@string/Add_Plan"
         android:textColor="@color/white"
         android:textSize="18sp"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -49,7 +50,7 @@ tools:context=".view.fragments.ChoicePlanFragment">
             android:layout_marginBottom="5dp"
             android:gravity="left"
             android:layoutDirection="rtl"
-            android:text="SaturDay"
+            android:text="@string/SaturDay"
             android:textColor="#7868e5"
             android:textSize="16sp" />
 
@@ -63,7 +64,7 @@ tools:context=".view.fragments.ChoicePlanFragment">
             android:layout_marginBottom="5dp"
             android:gravity="left"
             android:layoutDirection="rtl"
-            android:text="Sunday"
+            android:text="@string/SunDay"
             android:textColor="#7868e5"
             android:textSize="16sp" />
 
@@ -77,7 +78,7 @@ tools:context=".view.fragments.ChoicePlanFragment">
             android:layout_marginBottom="5dp"
             android:gravity="left"
             android:layoutDirection="rtl"
-            android:text="MonDay"
+            android:text="@string/MonDay"
             android:textColor="#7868e5"
             android:textSize="16sp" />
 
@@ -91,7 +92,7 @@ tools:context=".view.fragments.ChoicePlanFragment">
             android:layout_marginBottom="5dp"
             android:gravity="left"
             android:layoutDirection="rtl"
-            android:text="TuesDay"
+            android:text="@string/TuesDay"
             android:textColor="#7868e5"
             android:textSize="16sp" />
 
@@ -105,7 +106,7 @@ tools:context=".view.fragments.ChoicePlanFragment">
             android:layout_marginBottom="5dp"
             android:gravity="left"
             android:layoutDirection="rtl"
-            android:text="WednesDay"
+            android:text="@string/WednesDay"
             android:textColor="#7868e5"
             android:textSize="16sp" />
 
@@ -119,7 +120,7 @@ tools:context=".view.fragments.ChoicePlanFragment">
             android:layout_marginBottom="5dp"
             android:gravity="left"
             android:layoutDirection="rtl"
-            android:text="ThursDay"
+            android:text="@string/ThursDay"
             android:textColor="#7868e5"
             android:textSize="16sp" />
 
@@ -133,7 +134,7 @@ tools:context=".view.fragments.ChoicePlanFragment">
             android:layout_marginBottom="5dp"
             android:gravity="left"
             android:layoutDirection="rtl"
-            android:text="FriDay"
+            android:text="@string/FriDay"
             android:textColor="#7868e5"
             android:textSize="16sp" />
 

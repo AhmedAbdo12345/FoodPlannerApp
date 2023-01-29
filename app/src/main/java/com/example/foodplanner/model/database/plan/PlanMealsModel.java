@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.foodplanner.model.ModelClasses.MealsModel;
+
+import java.io.Serializable;
+
 @Entity
-public class PlanMealsModel {
+public class PlanMealsModel extends MealsModel {
 
     @PrimaryKey
     @NonNull

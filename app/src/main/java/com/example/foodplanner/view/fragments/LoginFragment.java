@@ -30,6 +30,7 @@ import com.example.foodplanner.presenter.interfaces.GoogleAuthInterface;
 import com.example.foodplanner.presenter.interfaces.SignUpFragmentInterface;
 import com.example.foodplanner.utils.GoogleAuth;
 import com.example.foodplanner.utils.SaveUserDataInFireStore;
+import com.example.foodplanner.utils.UserSharedPreference;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -43,6 +44,8 @@ import com.example.foodplanner.presenter.interfaces.LogInFragmentInterface;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import dmax.dialog.SpotsDialog;
+
 
 public class LoginFragment extends Fragment implements GoogleAuthInterface, LogInFragmentInterface {
 
@@ -53,9 +56,10 @@ public class LoginFragment extends Fragment implements GoogleAuthInterface, LogI
 
     LogInFragmentPresenter logInFragmentPresenter;
     EditText edtEmail, edtPassword;
-    Button btnLogin;
+    Button btnLogin,btnGuest;
     TextView tvForgotPassword,tvCreateNewAccount;
-
+AlertDialog dialog;
+String user="";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +82,9 @@ public class LoginFragment extends Fragment implements GoogleAuthInterface, LogI
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        dialog = new SpotsDialog(getContext());
+        dialog.setTitle("Login");
+btnGuest=view.findViewById(R.id.btn_Guest);
         edtEmail = view.findViewById(R.id.edt_email_login);
         edtPassword = view.findViewById(R.id.edt_password_login);
         btnLogin = view.findViewById(R.id.btn_Login);
@@ -97,14 +103,28 @@ public class LoginFragment extends Fragment implements GoogleAuthInterface, LogI
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.show();
+
                 logInFragmentPresenter.logIn(edtEmail, edtPassword);
             }
         });
 
+        btnGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user="Guest";
+                UserSharedPreference userSharedPreference = UserSharedPreference.getInstance(getContext());
+                userSharedPreference.saveDataInSharedPreference("user",user);
+                Toast.makeText(getContext(), "Login With Guest", Toast.LENGTH_SHORT).show();
 
+                Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
+                getActivity().finish();
+            }
+        });
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.show();
                 Intent intent = googleSignInClient.getSignInIntent();
                 startActivityForResult(intent, 100);
             }
@@ -141,27 +161,34 @@ public class LoginFragment extends Fragment implements GoogleAuthInterface, LogI
 
     @Override
     public void loginSucess(AuthResult authResult) {
+        user=edtEmail.getText().toString();
+        UserSharedPreference userSharedPreference = UserSharedPreference.getInstance(getContext());
+        userSharedPreference.saveDataInSharedPreference("user",user);
         //navigate
+        dialog.dismiss();
         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
-        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
 
+        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
+getActivity().finish();
     }
 
     @Override
-    public void loginFaliure(@NonNull Exception e) {
+    public void loginFaliure(String  message) {
         //navigate forget password
-        Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+        dialog.dismiss();
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSuccessGoogleAuthResult() {
+        dialog.dismiss();
         Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
 
     }
 
     @Override
     public void onFailureGoogleAuthResult(String message) {
-
+        dialog.dismiss();
     }
 }
 
