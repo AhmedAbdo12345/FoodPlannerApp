@@ -42,7 +42,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MealsViewH
     @NonNull
     @Override
     public SearchAdapter.MealsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new SearchAdapter.MealsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_random_meals, parent, false));
+        return new SearchAdapter.MealsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_meal, parent, false));
 
     }
 
@@ -72,9 +72,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MealsViewH
 
         public MealsViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardView=itemView.findViewById(R.id.mealCard);
-            imageView=itemView.findViewById(R.id.img_random_Meal);
-            textView=itemView.findViewById(R.id.tv_name_random_Meal);
+            cardView=itemView.findViewById(R.id.mealCardCat);
+            imageView=itemView.findViewById(R.id.mealThumbCat);
+            textView=itemView.findViewById(R.id.mealNameCat);
             cardView.setOnClickListener(this);
         }
 
