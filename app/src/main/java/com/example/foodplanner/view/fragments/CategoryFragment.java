@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.foodplanner.R;
+import com.example.foodplanner.model.ModelClasses.MealsModel;
 import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
 import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
 import com.example.foodplanner.model.database.favourite.FavModel;
@@ -28,7 +30,7 @@ import com.example.foodplanner.view.adapters.MealByCategoryAdapter;
 import java.util.List;
 
 
-public class CategoryFragment extends Fragment implements MealByCategoryAdapter.ClickListener, CategoryInterface {
+public class CategoryFragment extends Fragment implements MealByCategoryAdapter.ListItemClickListener, CategoryInterface {
 
 
     RecyclerView recyclerView;
@@ -84,9 +86,6 @@ public class CategoryFragment extends Fragment implements MealByCategoryAdapter.
 
 
 
-    @Override
-    public void onClick(View view, int position) {
-    }
 
     @Override
     public void getSuccessCategoriesFromApi(CategoryModelResponse categoryArrayListModels) {
@@ -95,12 +94,18 @@ public class CategoryFragment extends Fragment implements MealByCategoryAdapter.
 
     @Override
     public void getSuccessCategoriesBySearch(MealsModelResponse mealsModelResponse) {
-        adapter = new MealByCategoryAdapter(getContext(), mealsModelResponse);
+        adapter = new MealByCategoryAdapter(getContext(), mealsModelResponse,this);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void getFailureCategoriesFromApi(String message) {
 
+    }
+
+    @Override
+    public void onClick(int position, MealsModel meals) {
+        CategoryFragmentDirections.ActionCategoryFragmentToDetailsFragment action = CategoryFragmentDirections.actionCategoryFragmentToDetailsFragment(meals);
+        Navigation.findNavController(getView()).navigate(action);
     }
 }

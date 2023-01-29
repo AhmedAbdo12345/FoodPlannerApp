@@ -94,7 +94,7 @@ public class DetailsFragment extends Fragment {
                     youTubePlayer.loadVideo(videoId[1], 0);
 
                 } catch (Exception e) {
-                    Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+              //      Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

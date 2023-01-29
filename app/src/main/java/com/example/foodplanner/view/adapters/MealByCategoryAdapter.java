@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodplanner.R;
+import com.example.foodplanner.model.ModelClasses.MealsModel;
 import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
 import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
 import com.squareup.picasso.Picasso;
@@ -17,15 +18,19 @@ import java.util.List;
 
 public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAdapter.RecyclerViewHolder> {
     private CategoryModelResponse categoryModelResponses;
-    private MealsModelResponse meals;
+    private static MealsModelResponse meals;
     private Context context;
-    private static ClickListener clickListener;
+    static  private MealByCategoryAdapter.ListItemClickListener mOnClickListener;
 
-    public MealByCategoryAdapter(Context context,MealsModelResponse meals) {
+    public MealByCategoryAdapter(Context context,MealsModelResponse meals,MealByCategoryAdapter.ListItemClickListener mOnClickListene) {
         this.meals = meals;
         this.context = context;
+        this.mOnClickListener=mOnClickListene;
     }
 
+    public interface ListItemClickListener {
+        void onClick(int position, MealsModel meals);
+    }
     @NonNull
     @Override
     public MealByCategoryAdapter.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,17 +68,11 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
 
         @Override
         public void onClick(View v) {
-            clickListener.onClick(v, getAdapterPosition());
+            mOnClickListener.onClick(getAdapterPosition(),meals.getMeals().get(getAdapterPosition()));
         }
     }
 
 
-    public void setOnItemClickListener(ClickListener clickListener) {
-        MealByCategoryAdapter.clickListener = clickListener;
-    }
 
 
-    public interface ClickListener {
-        void onClick(View view, int position);
-    }
 }
