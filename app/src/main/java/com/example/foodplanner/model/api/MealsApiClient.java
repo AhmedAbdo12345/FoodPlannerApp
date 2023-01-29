@@ -3,8 +3,11 @@ package com.example.foodplanner.model.api;
 import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
 import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
 
+import java.util.concurrent.TimeUnit;
+
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.core.Single;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -14,6 +17,8 @@ public class MealsApiClient {
     private static final String BASE_URL="https://www.themealdb.com/api/json/v1/1/";
     private MealsApiInterface mealsApiInterface;
     private static MealsApiClient INSTANE;
+
+
 
     public MealsApiClient() {
 
@@ -69,4 +74,6 @@ public class MealsApiClient {
     public Single<MealsModelResponse> getSearchMealsByFirstLetter(String firstLetter){
         return mealsApiInterface.getSearchMealsByFirstLetter(firstLetter);
     }
+
+
 }

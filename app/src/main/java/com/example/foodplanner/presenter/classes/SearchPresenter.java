@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
 import com.example.foodplanner.model.api.MealsApiClient;
+import com.example.foodplanner.presenter.interfaces.CategoryInterface;
 import com.example.foodplanner.presenter.interfaces.SearchInterface;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -15,9 +16,16 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchPresenter {
 SearchInterface searchInterface;
+CategoryInterface categoryInterface;
+boolean check = true;
 
     public SearchPresenter(SearchInterface searchInterface) {
         this.searchInterface=searchInterface;
+    }
+    public SearchPresenter(CategoryInterface categoryInterface, boolean check) {
+        this.categoryInterface= categoryInterface ;
+        this.check = check;
+
     }
 
     public void searchByCategory(String category){
@@ -30,7 +38,13 @@ SearchInterface searchInterface;
             @Override
             public void onSuccess(@NonNull MealsModelResponse mealsModelResponse) {
                 Log.i("zxc", "onSuccess: "+mealsModelResponse);
-                searchInterface.getSuccessCategoriesBySearch(mealsModelResponse);
+                  if(check == true){
+                      searchInterface.getSuccessCategoriesBySearch(mealsModelResponse);
+                  }
+                  else {
+                      categoryInterface.getSuccessCategoriesBySearch(mealsModelResponse);
+                  }
+
             }
 
             @Override

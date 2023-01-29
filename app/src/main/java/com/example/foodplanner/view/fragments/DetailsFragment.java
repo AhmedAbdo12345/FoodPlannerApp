@@ -28,6 +28,7 @@ import com.example.foodplanner.model.database.plan.PlanMealsModel;
 import com.example.foodplanner.presenter.classes.FavPresenter;
 import com.example.foodplanner.utils.NetworkConnection;
 import com.example.foodplanner.utils.UserSharedPreference;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,8 +44,9 @@ public class DetailsFragment extends Fragment {
     YouTubePlayerView youTubePlayerView;
     Button buttonAddPlan;
     MealsModel model;
-ImageButton imageButtonFav;
-FavPresenter favPresenter;
+    ImageButton imageButtonFav;
+    FavPresenter favPresenter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,14 +63,13 @@ FavPresenter favPresenter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        imageButtonFav=view.findViewById(R.id.imgButtonFav);
+        imageButtonFav = view.findViewById(R.id.imgButtonFav);
         imgMeal = view.findViewById(R.id.img_meal_details);
         tvTitleMeal = view.findViewById(R.id.tv_title_details);
         tvCategoryMeal = view.findViewById(R.id.tv_meal_category_details);
         tvInstructions = view.findViewById(R.id.tv_instructions_details);
         tvArea = view.findViewById(R.id.tv_area_details);
         buttonAddPlan = view.findViewById(R.id.btn_Plan);
-
 
 
         model = DetailsFragmentArgs.fromBundle(getArguments()).getMeal();
@@ -100,7 +101,6 @@ FavPresenter favPresenter;
         /*----------------------------------------------------------*/
 
 
-
         String user = UserSharedPreference.getInstance(getContext()).getDataFromSharedPreference("user");
         if (user.equals("Guest") || (!NetworkConnection.isNetworkAvailable(getContext()))) {
             imageButtonFav.setEnabled(false);
@@ -123,22 +123,23 @@ FavPresenter favPresenter;
                     }
                 }
             });
-            favPresenter=new FavPresenter(getContext());
-            FavModel favModel=new FavModel(model.getIdMeal(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                    model.getStrMeal(),model.getStrCategory(),model.getStrArea(), model.getStrInstructions(), model.getStrMealThumb(), model.getStrYoutube());
+            favPresenter = new FavPresenter(getContext());
+            FavModel favModel = new FavModel(model.getIdMeal(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),
+                    model.getStrMeal(), model.getStrCategory(), model.getStrArea(), model.getStrInstructions(), model.getStrMealThumb(), model.getStrYoutube());
             imageButtonFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     favPresenter.insertFav(favModel);
-                    addFavinFireStore(favModel);
+                    // addFavinFireStore(favModel);
                 }
             });
 
         }
         /*----------------------------------------------------------*/
+
     }
 
-    private void addFavinFireStore(FavModel favModel) {
+    public void addFavinFireStore(FavModel favModel) {
         FirebaseFirestore.getInstance().collection("Fav").document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection("meals")
                 .document(favModel.getIdMeal())
                 .set(favModel)
@@ -151,8 +152,9 @@ FavPresenter favPresenter;
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.i("DetailsFragment", "onFailure: "+e.toString());
+                        Log.i("DetailsFragment", "onFailure: " + e.toString());
                     }
                 });
     }
+
 }

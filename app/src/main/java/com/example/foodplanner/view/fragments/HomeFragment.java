@@ -1,6 +1,5 @@
 package com.example.foodplanner.view.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -133,13 +129,19 @@ EditText editTextSearch;
     }
 
     @Override
+    public void getSuccessCategoriesBySearch(MealsModelResponse mealsModelResponse) {
+
+    }
+
+    @Override
     public void getFailureCategoriesFromApi(String message) {
 
     }
 
     @Override
-    public void onClickCategory(int position) {
-
+    public void onClickCategory(int position, String nameCategory) {
+        HomeFragmentDirections.ActionHomeNavToCategoryFragment action = HomeFragmentDirections.actionHomeNavToCategoryFragment(nameCategory);
+        Navigation.findNavController(getView()).navigate(action);
     }
 
 
