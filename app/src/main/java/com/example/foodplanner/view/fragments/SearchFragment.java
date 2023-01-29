@@ -69,28 +69,22 @@ SearchAdapter searchAdapter;
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (searchBy.equals(ConstantsClass.CATEGORY)){
                     searchPresenter.searchByCategory(s.toString());
-
                 }
                 if(searchBy.equals(ConstantsClass.Area)){
                     searchPresenter.searchByArea(s.toString());
-
                 }
                 if(searchBy.equals(ConstantsClass.Ingredients)){
                     searchPresenter.searchByIngredients(s.toString());
                 }
-
                 if(searchBy.equals(ConstantsClass.Name)){
                     searchPresenter.searchByName(s.toString());
                 }
-
                 if(searchBy.equals(ConstantsClass.Id)){
                     searchPresenter.searchByID(s.toString());
                 }
-
                 if(searchBy.equals(ConstantsClass.FirstLetter)){
                     searchPresenter.searchByFirstLetter(s.toString());
                 }
-
             }
 
             @Override
@@ -99,7 +93,7 @@ SearchAdapter searchAdapter;
             }
         });
         recyclerView_search_category.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         gridLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView_search_category.setLayoutManager(gridLayoutManager);
 

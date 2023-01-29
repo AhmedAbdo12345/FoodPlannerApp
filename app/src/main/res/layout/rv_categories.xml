@@ -30,10 +30,11 @@
 
             <LinearLayout
                 android:weightSum="10"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="left|center"
+                android:gravity="center"
                 >
                 <TextView
                     android:id="@+id/tv_name_category"
@@ -45,12 +46,12 @@
                     android:padding="5dp"
                     android:textSize="20sp"
                     android:gravity="center"/>
-                <ImageView
+                <!--<ImageView
                     android:layout_weight="2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_favorite_border_24"
-                    />
+                    />-->
             </LinearLayout>
 
         </LinearLayout>

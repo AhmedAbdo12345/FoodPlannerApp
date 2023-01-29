@@ -19,9 +19,9 @@
         android:icon="@drawable/ic_baseline_card_24"
         />
 
-    <item
+   <!-- <item
         android:id="@+id/profileNav"
         android:title="Person"
         android:icon="@drawable/ic_baseline_person_24"
-        />
+        />-->
 </menu>

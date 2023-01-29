@@ -46,11 +46,11 @@ public class HomeActivity extends AppCompatActivity {
         if (user.equals("Guest") || (!NetworkConnection.isNetworkAvailable(this))) {
             fav.setVisibility(View.GONE);
             plan.setVisibility(View.GONE);
-            profile.setVisibility(View.GONE);
+         //   profile.setVisibility(View.GONE);
         } else {
             fav.setVisibility(View.VISIBLE);
             plan.setVisibility(View.VISIBLE);
-          //  profile.setVisibility(View.GONE);
+          //  profile.setVisibility(View.VISIBLE);
 
         }
         navController = Navigation.findNavController(this, R.id.fragmentContainerView);
