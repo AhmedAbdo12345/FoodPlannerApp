@@ -43,6 +43,8 @@ public class LogInFragmentPresenter {
                                     ConstantsClass.setEMAIL(email);
                                     //  GetPlanMealsFromFireStore.getAllPlan(context);
                                     GetPlanMealsFromFireStore.getPlanFromFireStore(context);
+                                    GetPlanMealsFromFireStore.getFavFromFireStore(context);
+
                                     logInFragmentInterface.loginSucess(authResult);
 
 

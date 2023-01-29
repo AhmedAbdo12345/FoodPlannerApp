@@ -71,6 +71,22 @@ public class FavRepository {
         });
     }
 
+    public void deleteTableFav() {
+        favDao.deleteFavTable().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d){
+
+            }
+            @Override
+            public void onComplete() {
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        });
+    }
 
 
     public void insertAllFavInRoom(ArrayList<FavModel> favModelArrayList){
