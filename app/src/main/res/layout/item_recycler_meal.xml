@@ -12,11 +12,12 @@
     android:focusable="true">
 
     <RelativeLayout
+        android:id="@+id/mealCardRow"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/mealThumb"
+            android:id="@+id/mealThumbCat"
             android:scaleType="centerCrop"
             android:src="@drawable/sample_image_meal"
             android:layout_width="match_parent"
@@ -29,8 +30,8 @@
             android:gravity="center"
             android:maxLines="2"
             android:ellipsize="end"
-            android:id="@+id/mealName"
-            android:layout_below="@id/mealThumb"
+            android:id="@+id/mealNameCat"
+            android:layout_below="@id/mealThumbCat"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

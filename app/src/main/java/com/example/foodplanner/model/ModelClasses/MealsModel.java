@@ -1,6 +1,7 @@
 package com.example.foodplanner.model.ModelClasses;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class MealsModel implements Serializable {
 

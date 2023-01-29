@@ -1,8 +1,6 @@
 package com.example.foodplanner.view.adapters;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,23 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
-import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
-import com.example.foodplanner.presenter.classes.MealsPresenter;
-import com.example.foodplanner.presenter.interfaces.CategoryInterface;
-import com.example.foodplanner.presenter.interfaces.MealstInterface;
-import com.example.foodplanner.utils.ConstantsClass;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MealsViewHolder> {
     private CategoryModelResponse categoryModelResponses;
@@ -41,7 +28,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MealsV
 
 
     public interface ListItemClickListener {
-        void onClickCategory(int position);
+        void onClickCategory(int position,String nameCategory);
     }
 
     @NonNull
@@ -83,8 +70,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MealsV
 
         @Override
         public void onClick(View v) {
-            mOnClickListener.onClickCategory( getAdapterPosition());
+            mOnClickListener.onClickCategory( getAdapterPosition(),categoryModelResponses
+                    .getCategories().get(getAdapterPosition()).getStrCategory());
 
         }
     }
 }
+

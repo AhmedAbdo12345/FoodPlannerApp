@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_homeNav_to_choiceSearchByFragment"
             app:destination="@id/choiceSearchByFragment" />
+        <action
+            android:id="@+id/action_homeNav_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileNav"
@@ -85,5 +88,14 @@
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.foodplanner.view.fragments.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+        <argument
+            android:name="nameCategory"
+            app:argType="string" />
     </fragment>
 </navigation>

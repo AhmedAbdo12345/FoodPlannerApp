@@ -23,7 +23,7 @@ public class CategoryPresenter {
         this.categoryInterface = categoryInterface;
     }
 
-   public void getCategories() {
+    public void getCategories() {
         SingleObserver<CategoryModelResponse> singleObserver=new SingleObserver<CategoryModelResponse>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
