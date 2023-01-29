@@ -150,8 +150,9 @@ AlertDialog dialog;
         //navigate
         dialog.dismiss();
         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
-        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
 
+        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeActivity);
+getActivity().finish();
     }
 
     @Override

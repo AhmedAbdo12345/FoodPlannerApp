@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import com.example.foodplanner.model.firebase.GetPlanMealsFromFireStore;
 import com.example.foodplanner.presenter.interfaces.LogInFragmentInterface;
 import com.example.foodplanner.utils.ConstantsClass;
+import com.example.foodplanner.view.activities.AuthActivity;
+import com.example.foodplanner.view.fragments.LoginFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -42,6 +44,8 @@ public class LogInFragmentPresenter {
                                     //  GetPlanMealsFromFireStore.getAllPlan(context);
                                     GetPlanMealsFromFireStore.getPlanFromFireStore(context);
                                     logInFragmentInterface.loginSucess(authResult);
+
+
                                 }else {
                                     firebaseAuth.getCurrentUser().sendEmailVerification();
                                     String message="Check Email to Verification before login";

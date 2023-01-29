@@ -1,39 +1,40 @@
 package com.example.foodplanner.view.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodplanner.R;
-import com.example.foodplanner.model.database.plan.PlanMealsModel;
+import com.example.foodplanner.model.ModelClasses.DisplayPlanModel;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class DayAdapter extends RecyclerView.Adapter<DayAdapter.DayViewHolder> {
-    private ArrayList<String> listUniqDays;
-    List<PlanMealsModel> newList=new ArrayList<>();
 
-    List<PlanMealsModel> planMealsModelList;
     Context context;
-    PlanMealsAdapter.ListItemClickListener mOnClickListener;
+    private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
-    public DayAdapter(ArrayList<String> listUniqDays,List<PlanMealsModel> planMealsModelList, Context applicationContext,PlanMealsAdapter.ListItemClickListener mOnClickListener ) {
-        this.listUniqDays = listUniqDays;
-        this.context = applicationContext;
-        this.planMealsModelList=planMealsModelList;
-        this.mOnClickListener=mOnClickListener;
+    List<DisplayPlanModel> itemList;
+    PlanMealsAdapter.AdapterConnector adapterConnector;
 
+
+    public void setItemList(List<DisplayPlanModel> itemList) {
+        this.itemList = itemList;
+        notifyDataSetChanged();
     }
 
+    public DayAdapter(List<DisplayPlanModel> itemList, Context contex, PlanMealsAdapter.AdapterConnector adapterConnector) {
+        context = contex;
+        this.itemList = itemList;
+        this.adapterConnector = adapterConnector;
+
+    }
 
     @NonNull
     @Override
@@ -43,30 +44,29 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.DayViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DayAdapter.DayViewHolder holder, int position) {
-        newList.clear();
-        holder.textView.setText(listUniqDays.get(position));
-       holder.recyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 1);
-        gridLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        holder.recyclerView.setLayoutManager(gridLayoutManager);
+    public void onBindViewHolder(@NonNull DayViewHolder holder, int position) {
 
-        for(int i=0;i<planMealsModelList.size();i++){
-            if (planMealsModelList.get(i).getDay().equals( listUniqDays.get(position))){
-                newList.add(planMealsModelList.get(i));
-            }
-        }
-        Log.i("zxc", "onBindViewHolder: "+newList);
-        PlanMealsAdapter  planMealsAdapter = new PlanMealsAdapter(newList,context,listUniqDays,mOnClickListener);
 
+        DisplayPlanModel parentItem = itemList.get(position);
+        holder.textView.setText(parentItem.getnameDay());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(holder.recyclerView.getContext(), LinearLayoutManager.HORIZONTAL, false);
+
+        layoutManager.setInitialPrefetchItemCount(parentItem.getListItemPlan().size());
+        PlanMealsAdapter planMealsAdapter = new PlanMealsAdapter(parentItem.getListItemPlan(), context, adapterConnector);
+        holder.recyclerView.setLayoutManager(layoutManager);
         holder.recyclerView.setAdapter(planMealsAdapter);
+        holder.recyclerView.setRecycledViewPool(viewPool);
    
 
     }
 
     @Override
     public int getItemCount() {
-        return listUniqDays.size();
+        if (itemList !=null) {
+            return itemList.size();
+        }else {
+            return 0;
+        }
     }
 
     public class DayViewHolder extends RecyclerView.ViewHolder  {

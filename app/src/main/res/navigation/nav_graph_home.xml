@@ -39,7 +39,11 @@
         android:id="@+id/plansNav"
         android:name="com.example.foodplanner.view.fragments.PlanFragment"
         android:label="Plan"
-        tools:layout="@layout/fragment_plan" />
+        tools:layout="@layout/fragment_plan" >
+        <action
+            android:id="@+id/action_plansNav_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.foodplanner.view.fragments.DetailsFragment"
@@ -78,5 +82,8 @@
         <argument
             android:name="seachBy"
             app:argType="string" />
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
 </navigation>

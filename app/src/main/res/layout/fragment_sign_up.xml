@@ -112,6 +112,7 @@
                 android:layout_marginTop="25dp"
                 android:background="@drawable/button_background"
                 android:text="@string/sign_up"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -150,7 +151,7 @@
                 android:drawableStart="@drawable/common_google_signin_btn_icon_dark_normal"
                 android:text="@string/connect_with_google"
                 android:textColor="@color/white"
-
+                android:textAllCaps="false"
                 android:textSize="16sp"
                 tools:ignore="TextContrastCheck" />
 

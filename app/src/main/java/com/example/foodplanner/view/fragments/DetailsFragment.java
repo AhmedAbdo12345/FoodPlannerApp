@@ -78,8 +78,9 @@ FavPresenter favPresenter;
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                String[] videoId = model.getStrYoutube().split("=");
+
                 try {
+                    String[] videoId = model.getStrYoutube().split("=");
                     youTubePlayer.loadVideo(videoId[1], 0);
 
                 } catch (Exception e) {

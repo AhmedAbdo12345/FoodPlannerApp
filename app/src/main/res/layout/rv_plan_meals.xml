@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_Plan"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_margin="5dp"
@@ -49,12 +50,7 @@
                     android:textSize="20sp" />
 
 
-                <TextView
-                    android:id="@+id/tv_plan_category_meal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="This meal contains of eggs nad tomatao , fkkfjkjkjfkjfklfklkflklkflkf"
-                    />
+
 
             </LinearLayout>
             <ImageView
