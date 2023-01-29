@@ -24,8 +24,14 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelClasses.MealsModel;
 
 import com.example.foodplanner.model.database.favourite.FavModel;
+import com.example.foodplanner.model.database.plan.PlanMealsModel;
 import com.example.foodplanner.presenter.classes.FavPresenter;
+import com.example.foodplanner.utils.NetworkConnection;
+import com.example.foodplanner.utils.UserSharedPreference;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -62,6 +68,9 @@ FavPresenter favPresenter;
         tvInstructions = view.findViewById(R.id.tv_instructions_details);
         tvArea = view.findViewById(R.id.tv_area_details);
         buttonAddPlan = view.findViewById(R.id.btn_Plan);
+
+
+
         model = DetailsFragmentArgs.fromBundle(getArguments()).getMeal();
         tvTitleMeal.setText(model.getStrMeal());
         tvCategoryMeal.setText(model.getStrCategory());
@@ -89,25 +98,61 @@ FavPresenter favPresenter;
             }
         });
         /*----------------------------------------------------------*/
-        buttonAddPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (model != null) {
-                    DetailsFragmentDirections.ActionDetailsFragmentToChoicePlanFragment action = DetailsFragmentDirections.actionDetailsFragmentToChoicePlanFragment(model);
-                    Navigation.findNavController(getView()).navigate(action);
+
+
+
+        String user = UserSharedPreference.getInstance(getContext()).getDataFromSharedPreference("user");
+        if (user.equals("Guest") || (!NetworkConnection.isNetworkAvailable(getContext()))) {
+            imageButtonFav.setEnabled(false);
+            buttonAddPlan.setEnabled(false);
+            imageButtonFav.setVisibility(View.GONE);
+            buttonAddPlan.setVisibility(View.GONE);
+        } else {
+            imageButtonFav.setEnabled(true);
+            buttonAddPlan.setEnabled(true);
+            imageButtonFav.setVisibility(View.VISIBLE);
+            buttonAddPlan.setVisibility(View.VISIBLE);
+
+            /*----------------------------------------------------------*/
+            buttonAddPlan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (model != null) {
+                        DetailsFragmentDirections.ActionDetailsFragmentToChoicePlanFragment action = DetailsFragmentDirections.actionDetailsFragmentToChoicePlanFragment(model);
+                        Navigation.findNavController(getView()).navigate(action);
+                    }
                 }
-            }
-        });
-        favPresenter=new FavPresenter(getContext());
-        FavModel favModel=new FavModel(model.getIdMeal(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                model.getStrMeal(),model.getStrCategory(),model.getStrArea(), model.getStrInstructions(), model.getStrMealThumb(), model.getStrYoutube());
-        imageButtonFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                favPresenter.insertFav(favModel);
-            }
-        });
+            });
+            favPresenter=new FavPresenter(getContext());
+            FavModel favModel=new FavModel(model.getIdMeal(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),
+                    model.getStrMeal(),model.getStrCategory(),model.getStrArea(), model.getStrInstructions(), model.getStrMealThumb(), model.getStrYoutube());
+            imageButtonFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    favPresenter.insertFav(favModel);
+                    addFavinFireStore(favModel);
+                }
+            });
+
+        }
+        /*----------------------------------------------------------*/
     }
 
-
+    private void addFavinFireStore(FavModel favModel) {
+        FirebaseFirestore.getInstance().collection("Fav").document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection("meals")
+                .document(favModel.getIdMeal())
+                .set(favModel)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Toast.makeText(context, "The Meal Added To Favorite", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("DetailsFragment", "onFailure: "+e.toString());
+                    }
+                });
+    }
 }
