@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.foodplanner.model.database.plan.DatabaseMeals;
+import com.example.foodplanner.presenter.classes.FavPresenter;
 import com.example.foodplanner.presenter.classes.PlanPresenter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.foodplanner.R;
@@ -55,6 +56,11 @@ public class HomeActivity extends AppCompatActivity {
            PlanPresenter planPresenter = new PlanPresenter(HomeActivity.this);
             planPresenter.deletePlanTable();
             //------------------------------------
+            //-------------To Delete Fav Table -----------------------
+            FavPresenter favPresenter = new FavPresenter(HomeActivity.this);
+            favPresenter.deleteFavTable();
+            //------------------------------------
+
 
             FirebaseAuth.getInstance().signOut();
 

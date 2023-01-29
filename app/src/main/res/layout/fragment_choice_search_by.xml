@@ -15,94 +15,89 @@
            android:orientation="vertical">
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Search by"
-                android:textSize="33sp"
-                android:textStyle="bold"
-                android:shadowDx="10"
-                android:shadowDy="10"
-                android:shadowRadius="15"
-                android:shadowColor="@color/purple_200"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:textColor="@color/purple_500"/>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="20dp"
+               android:gravity="center"
+               android:shadowColor="@color/purple_200"
+               android:shadowDx="10"
+               android:shadowDy="10"
+               android:shadowRadius="15"
+               android:text="@string/Search_by"
+               android:textColor="@color/purple_500"
+               android:textSize="33sp"
+               android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn_search_by_area"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="#fff"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="10dp"
-                android:text="Area"
-                android:textColor="@color/purple_500"
-                android:textSize="20sp" />
+           <Button
+               android:id="@+id/btn_search_by_area"
+               android:layout_width="match_parent"
+               android:layout_height="60dp"
+               android:layout_marginLeft="40dp"
+               android:layout_marginTop="30dp"
+               android:layout_marginRight="40dp"
+               android:layout_marginBottom="10dp"
+               android:background="#fff"
+               android:text="@string/Area"
+               android:textAllCaps="false"
+               android:textColor="@color/purple_500"
+               android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/btn_search_by_category"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="#fff"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Category"
-                android:textColor="@color/purple_700"
-                android:textSize="20sp" />
-            <Button
-                android:id="@+id/btn_search_by_ingredient"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="#fff"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Ingredient"
-                android:textColor="@color/purple_700"
-                android:textSize="20sp" />
+           <Button
+               android:id="@+id/btn_search_by_category"
+               android:layout_width="match_parent"
+               android:layout_height="60dp"
+               android:layout_marginLeft="40dp"
+               android:layout_marginTop="20dp"
+               android:layout_marginRight="40dp"
+               android:layout_marginBottom="10dp"
+               android:background="#fff"
+               android:text="@string/Category"
+               android:textAllCaps="false"
+               android:textColor="@color/purple_700"
+               android:textSize="20sp" />
+
+           <Button
+               android:id="@+id/btn_search_by_ingredient"
+               android:layout_width="match_parent"
+               android:layout_height="60dp"
+               android:layout_marginLeft="40dp"
+               android:layout_marginTop="20dp"
+               android:layout_marginRight="40dp"
+               android:layout_marginBottom="10dp"
+               android:background="#fff"
+               android:text="@string/Ingredient"
+               android:textAllCaps="false"
+               android:textColor="@color/purple_700"
+               android:textSize="20sp" />
 
            <Button
                android:id="@+id/btn_search_by_name"
                android:layout_width="match_parent"
                android:layout_height="60dp"
-               android:background="#fff"
                android:layout_marginLeft="40dp"
-               android:layout_marginRight="40dp"
                android:layout_marginTop="20dp"
+               android:layout_marginRight="40dp"
                android:layout_marginBottom="10dp"
-               android:text="Name"
+               android:background="#fff"
+               android:text="@string/Name"
+               android:textAllCaps="false"
                android:textColor="@color/purple_700"
                android:textSize="20sp" />
 
-           <Button
-               android:id="@+id/btn_search_by_id"
-               android:layout_width="match_parent"
-               android:layout_height="60dp"
-               android:background="#fff"
-               android:layout_marginLeft="40dp"
-               android:layout_marginRight="40dp"
-               android:layout_marginTop="20dp"
-               android:layout_marginBottom="10dp"
-               android:text="Id"
-               android:textColor="@color/purple_700"
-               android:textSize="20sp" />
+
 
            <Button
                android:id="@+id/btn_search_by_first"
                android:layout_width="match_parent"
                android:layout_height="60dp"
-               android:background="#fff"
                android:layout_marginLeft="40dp"
-               android:layout_marginRight="40dp"
                android:layout_marginTop="20dp"
+               android:layout_marginRight="40dp"
                android:layout_marginBottom="10dp"
-               android:text="First Letter"
+               android:background="#fff"
+               android:textAllCaps="false"
+               android:text="@string/First_Letter"
                android:textColor="@color/purple_700"
                android:textSize="20sp" />
 

@@ -36,6 +36,11 @@ public FavPresenter(Context context){
     }
 
     @Override
+    public void deleteFavTable() {
+        favRepository.deleteTableFav();
+    }
+
+    @Override
     public void insertAllFav(ArrayList<FavModel> favModelArrayList) {
           favRepository.insertAllFavInRoom(favModelArrayList);
     }

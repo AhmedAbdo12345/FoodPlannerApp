@@ -63,20 +63,20 @@
 
         <TextView
             android:id="@+id/tv_categories"
-            android:text="Categories"
-            android:textSize="19sp"
-            android:textColor="@color/teal_700"
-            android:textStyle="bold"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_randomMeal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/Categories"
+            android:textColor="@color/teal_700"
+            android:textSize="19sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/rv_categories"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/rv_randomMeal"
-            app:layout_constraintTop_toBottomOf="@+id/rv_randomMeal"
-            android:layout_below="@+id/rv_randomMeal"/>
+            app:layout_constraintTop_toBottomOf="@+id/rv_randomMeal" />
       <!--    <TextView
             android:id="@+id/tv_categories"
             android:layout_width="0dp"

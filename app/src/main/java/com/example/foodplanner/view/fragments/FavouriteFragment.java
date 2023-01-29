@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.ModelClasses.MealsModel;
@@ -23,6 +24,11 @@ import com.example.foodplanner.view.adapters.DayAdapter;
 import com.example.foodplanner.view.adapters.FavouriteMealsAdapter;
 import com.example.foodplanner.view.adapters.MealsAdapter;
 import com.example.foodplanner.view.adapters.PlanMealsAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -90,6 +96,31 @@ public class FavouriteFragment extends Fragment implements FavouriteMealsAdapter
     @Override
     public void onClick(int position, FavModel favModel) {
         favPresenter.deleteFav(favModel);
+        deleteFavMealFromFireStore(favModel);
+    }
+    public void deleteFavMealFromFireStore( FavModel favModel) {
 
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = firestore.collection("Fav")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection("meals").document(favModel.getIdMeal());
+
+
+        documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    getFragmentManager().beginTransaction().detach(FavouriteFragment.this).attach(FavouriteFragment.this).commit();
+
+                    Toast.makeText(requireContext(), "Meal is Removed Successful", Toast.LENGTH_SHORT).show();
+
+
+                } else {
+
+                    Log.i("FavouriteFragment", "onComplete: "+task.getException().getMessage().toString());
+
+                }
+
+            }
+        });
     }
 }

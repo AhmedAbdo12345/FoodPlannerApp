@@ -14,4 +14,6 @@ public interface SearchInterface {
     public void getSuccessIdBySearch(MealsModelResponse mealsModelResponse) ;
 
     public void getSuccessFirstLetterBySearch(MealsModelResponse mealsModelResponse) ;
+
+    public void getFailedIdBySearch(String message) ;
 }
