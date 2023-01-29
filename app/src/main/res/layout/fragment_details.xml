@@ -15,7 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:padding="15dp"
+            android:padding="20dp"
+            android:layout_margin="15dp"
             android:orientation="vertical">
 
             <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -31,6 +32,8 @@
                 android:shadowColor="#A5ACAC"
                 android:shadowDx="10"
                 android:shadowDy="10"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:shadowRadius="15"
                 android:text="Meal title"
                 android:textColor="#000"
@@ -42,11 +45,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:contentDescription="@string/app_name"
-                android:elevation="5sp"
+                android:elevation="2sp"
                 android:scaleType="fitXY"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Instructions"
+                    android:textStyle="bold"
+                    android:shadowColor="#A5ACAC"
+                    android:shadowDx="10"
+                    android:shadowDy="10"
+                    android:textColor="#000"
+                    android:textSize="25sp" />
                 <TextView
                     android:id="@+id/tv_instructions_details"
                     android:layout_width="wrap_content"
@@ -54,52 +73,96 @@
                     android:layout_marginTop="5dp"
                     android:text="Instructions"
                     android:textColor="#000"
-                    android:textSize="22sp" />
+                    android:textSize="18sp" />
+
+            </LinearLayout>
 
 
-                <ImageButton
-                    android:id="@+id/unfavouriteButton2"
-                    android:layout_width="60dp"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="49dp"
                     android:layout_marginEnd="20dp"
+                    android:text="Category"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteY="316dp" />
+
+                <TextView
+                    android:id="@+id/tv_meal_category_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="49dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="Category"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteY="316dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="49dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Area"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_area_details"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="49dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint=" area"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="8"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imgButtonFav"
+                    android:layout_width="60dp"
+                    android:layout_weight="4"
+                    android:layout_height="49dp"
                     android:backgroundTint="@color/white"
-                    android:contentDescription="UnFavouriteButton"
-                    app:srcCompat="@android:drawable/star_off" />
-
-            <ImageButton
-                android:id="@+id/imgButtonFav"
-                android:layout_width="60dp"
-                android:layout_height="49dp"
-                android:backgroundTint="@color/white"
-                android:contentDescription="FavouriteButton"
-                app:srcCompat="@android:drawable/star_on"
-                tools:layout_editor_absoluteY="316dp" />
-
-            <TextView
-                android:id="@+id/tv_meal_category_details"
-                android:layout_width="wrap_content"
-                android:layout_height="49dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Category"
-                android:textSize="22sp"
-                tools:layout_editor_absoluteY="316dp" />
+                    android:contentDescription="FavouriteButton"
+                    app:srcCompat="@android:drawable/star_on"
+                    tools:layout_editor_absoluteY="316dp" />
 
 
-            <TextView
-                android:id="@+id/tv_area_details"
-                android:layout_width="wrap_content"
-                android:layout_height="41dp"
-                android:layout_marginTop="5dp"
-                android:hint=" area"
-                android:textSize="22sp" />
+                <Button
+                    android:id="@+id/btn_Plan"
+                    android:layout_width="100dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Add to Plan"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/teal_700"
+                    android:layout_marginBottom="50dp"/>
+            </LinearLayout>
 
 
-           <Button
-               android:id="@+id/btn_Plan"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="Add to Plan"
-               android:layout_marginBottom="50dp"/>
 
         </LinearLayout>
     </ScrollView>

@@ -4,6 +4,7 @@ import com.example.foodplanner.model.ModelResponse.CategoryModelResponse;
 import com.example.foodplanner.model.ModelResponse.MealsModelResponse;
 
 import io.reactivex.rxjava3.core.Single;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -20,8 +21,7 @@ public interface MealsApiInterface {
     @GET("filter.php")
     public Single<MealsModelResponse> getFilterByArea(@Query("a") String area);
 
-
-
+;
 
     @GET("search.php")
     public Single<MealsModelResponse> getSearchMealsByName(@Query("s") String name);
